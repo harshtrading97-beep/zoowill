@@ -1,83 +1,107 @@
-// ZoOwill · Complete 113-Product Official Catalogue (Harsh International Knp)
+// ZoOwill · Complete 113-Product Official Catalogue
+// Harsh International Knp
 // All 113 Verified Amazon India Listings · INR (₹) Only
+
+// ── Local Category & Product Images ──────────────────────────
+import saddlesKathisImg from "../assets/saddles_&-kathis.png";
+import harnessesImg from "../assets/harnesses.png";
+import bridlesBitsImg from "../assets/bridles-&-bits.png";
+import haltersLeadsImg from "../assets/halters-&-leads.png";
+import stirrupsGirthsImg from "../assets/stirrups-&-girths.png";
+import horseProtectionRugsImg from "../assets/horse-protection-&-rugs.png";
+import groomingStableImg from "../assets/grooming-&-stable.png";
+import riderApparelImg from "../assets/rider-&-apparel.png";
+import zoowilgroominganimalbrushImg from "../assets/zoowil-grooming-animal-brush.png";
+import zoowilblackridingbreechesImg from "../assets/zoowil-black-riding_breeches.png";
+import zoowilblackhorsehoofbootsImg from "../assets/zoowil-black-horse-hoof-boots.png";
 
 export const FALLBACK_IMG =
   "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1000&q=80";
 
 export const handleImageError = (e) => {
-  if (e.target.src !== FALLBACK_IMG) e.target.src = FALLBACK_IMG;
+  if (e.target.src !== FALLBACK_IMG) {
+    e.target.src = FALLBACK_IMG;
+  }
 };
 
 // ── Official 8 Categories (+ All) ────────────────────────────
 export const categories = [
-  { id: "all",        label: "All Products" },
-  { id: "saddles",    label: "Saddles & Kathis" },
-  { id: "harnesses",  label: "Harnesses" },
-  { id: "bridles",    label: "Bridles & Bits" },
-  { id: "halters",    label: "Halters & Leads" },
-  { id: "stirrups",   label: "Stirrups & Girths" },
+  { id: "all", label: "All Products" },
+  { id: "saddles", label: "Saddles & Kathis" },
+  { id: "harnesses", label: "Harnesses" },
+  { id: "bridles", label: "Bridles & Bits" },
+  { id: "halters", label: "Halters & Leads" },
+  { id: "stirrups", label: "Stirrups & Girths" },
   { id: "protection", label: "Horse Protection & Rugs" },
-  { id: "grooming",   label: "Grooming & Stable" },
-  { id: "rider",      label: "Rider & Apparel" },
+  { id: "grooming", label: "Grooming & Stable" },
+  { id: "rider", label: "Rider & Apparel" },
 ];
 
-// ── Category Showcase (Official 113-Product Breakdown) ───────
+// ── Category Showcase (Official 113-Product Breakdown) ──────
 export const categoryShowcase = [
   {
     id: "saddles",
     label: "Saddles & Kathis",
     count: 10,
-    description: "English dressage, jumping, polo saddles and traditional Kashmiri Kathis.",
-    image: "https://images.unsplash.com/photo-1566251037378-5e04e3bec343?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "English dressage, jumping, polo saddles and traditional Kashmiri Kathis.",
+    image: saddlesKathisImg,
   },
   {
     id: "harnesses",
     label: "Harnesses",
     count: 2,
-    description: "Single and double horse heavy driving leather harness sets in Cob/Full sizes.",
-    image: "https://images.unsplash.com/photo-1551884831-bbf3cdc6469e?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "Single and double horse heavy driving leather harness sets in Cob/Full sizes.",
+    image: harnessesImg,
   },
   {
     id: "bridles",
     label: "Bridles & Bits",
     count: 14,
-    description: "Leather and PVC bridles, crystal browbands, martingales, and stainless steel bits.",
-    image: "https://images.unsplash.com/photo-1509914398892-963f53e6e2f1?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "Leather and PVC bridles, crystal browbands, martingales, and stainless steel bits.",
+    image: bridlesBitsImg,
   },
   {
     id: "halters",
     label: "Halters & Leads",
     count: 17,
-    description: "Nylon foal and horse halters, 8m–10m handwoven rope leads, and brass chain leads.",
-    image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "Nylon foal and horse halters, 8m–10m handwoven rope leads, and brass chain leads.",
+    image: haltersLeadsImg,
   },
   {
     id: "stirrups",
     label: "Stirrups & Girths",
     count: 16,
-    description: "Aligarh iron rakabs, aluminium safety stirrups, fleece girths and shock-absorbing saddle pads.",
-    image: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "Aligarh iron rakabs, aluminium safety stirrups, fleece girths and shock-absorbing saddle pads.",
+    image: stirrupsGirthsImg,
   },
   {
     id: "protection",
     label: "Horse Protection & Rugs",
     count: 19,
-    description: "Waterproof winter turnout rugs (75\" Jhool), fleece leg wraps, bell boots, and hoof boots.",
-    image: "https://images.unsplash.com/photo-1450052590821-8bf91254a353?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "Waterproof winter turnout rugs (75-inch Jhool), fleece leg wraps, bell boots, and hoof boots.",
+    image: horseProtectionRugsImg,
   },
   {
     id: "grooming",
     label: "Grooming & Stable",
     count: 23,
-    description: "Wooden brushes, metal khararas, curry combs, hoof picks, hay nets and electric clippers.",
-    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "Wooden brushes, metal khararas, curry combs, hoof picks, hay nets and electric clippers.",
+    image: groomingStableImg,
   },
   {
     id: "rider",
     label: "Rider & Apparel",
     count: 12,
-    description: "Unisex riding breeches, body protector vests, stainless steel spurs and leather belts.",
-    image: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=1200&q=85",
+    description:
+      "Unisex riding breeches, body protector vests, stainless steel spurs and leather belts.",
+    image: riderApparelImg,
   },
 ];
 
@@ -93,7 +117,7 @@ export function formatPrice(priceINR, priceMax = null) {
 export const products = [
   {
     "id": 1,
-    "name": "ZoOwil Grooming animal Brush for Horse, Cow & All Purpose with Hand Strap, 20 x 9 cm, Soft Bristles.",
+    "name": "ZoOwil Oval All Purpose Grooming Brush for Horse, Cow & Pets with Hand Strap, 20 x 9 cm, Soft Bristles",
     "category": "grooming",
     "badge": "Popular Choice",
     "priceINR": 214,
@@ -102,26 +126,30 @@ export const products = [
     "rating": 4.5,
     "reviewCount": 2,
     "sizes": [
-      "Standard"
+      "20 x 9 x 6 cm"
     ],
     "colors": [
-      "Black",
-      "Brown"
+      "Green"
     ],
-    "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=85",
+    "image": zoowilgroominganimalbrushImg,
+    "description": "Versatile oval-shaped all-purpose grooming brush (20 x 9 x 6 cm, 200 g) with soft bristles and an adjustable black hand strap for a secure, comfortable grip across horses, cows, pets, and everyday brushing.",
     "specs": [
-      "Durable natural bristles & hardwood base",
-      "Comfortable ergonomic hand grip",
-      "Removes loose hair, dirt & sweat",
-      "Designed for horses, cattle & livestock"
+      "Oval shape (20 x 9 x 6 cm) with soft, gentle bristles",
+      "Adjustable black hand strap for firm, secure grip",
+      "Compact, lightweight (200 g) & easy to carry",
+      "Suitable for horses, cows, pets & all-purpose grooming"
     ],
     "sku": "ZW-GS-001",
+    "partNumber": "ho-gr-pl-bru",
+    "genericName": "Horse wooden brush",
+    "manufacturer": "HARSH INTERNATIONAL",
+    "countryOfOrigin": "India",
     "asin": "B0GVP8VVN2",
     "amazonUrl": "https://www.amazon.in/dp/B0GVP8VVN2"
   },
   {
     "id": 2,
-    "name": "ZoOwill Unisex Riding Breeches Pant, Black, Zip Pocket, Ankle Fastener Detail, Slim Fit Equestrian Trousers.",
+    "name": "ZoOwill Unisex Riding Breeches Pant, Black, Zip Pocket, Ankle Fastener Detail, Slim Fit Equestrian Trousers",
     "category": "rider",
     "badge": "Popular Choice",
     "priceINR": 999,
@@ -131,20 +159,23 @@ export const products = [
     "reviewCount": 26,
     "sizes": [
       "32",
-      "34",
       "36"
     ],
     "colors": [
       "Black"
     ],
-    "image": "https://images.unsplash.com/photo-1566251037378-5e04e3bec343?auto=format&fit=crop&w=1200&q=85",
+    "image": zoowilblackridingbreechesImg,
+    "description": "Sleek slim-fit unisex riding breeches in classic black (400 g), engineered with a front zippered pocket, hook-and-loop velcro ankle fasteners for a snug fit inside riding boots, and a sturdy gold-tone button waistband with belt loops.",
     "specs": [
-      "High-stretch breathable technical fabric",
-      "Reinforced inner-knee grip panels",
-      "Precision-engineered safety hardware",
-      "Comfortable athletic tapered fit"
+      "Sleek slim-fit unisex silhouette for riding & casual wear",
+      "Front zippered pocket to keep essentials safe during rides",
+      "Hook-and-loop velcro ankle fasteners for snug boot fit",
+      "Sturdy gold-tone button closure with belt loops (400 g)"
     ],
     "sku": "ZW-RA-002",
+    "genericName": "Equestrian Riding Breeches",
+    "manufacturer": "HARSH INTERNATIONAL",
+    "countryOfOrigin": "India",
     "asin": "B0H8ZNZPBQ",
     "amazonUrl": "https://www.amazon.in/dp/B0H8ZNZPBQ"
   },
@@ -167,7 +198,7 @@ export const products = [
       "Black",
       "Brown"
     ],
-    "image": "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1200&q=85",
+    "image": zoowilblackhorsehoofbootsImg,
     "specs": [
       "Rip-stop waterproof breathable exterior",
       "Comfort fleece lining with neck cover",
