@@ -11,9 +11,11 @@ import stirrupsGirthsImg from "../assets/stirrups-&-girths.png";
 import horseProtectionRugsImg from "../assets/horse-protection-&-rugs.png";
 import groomingStableImg from "../assets/grooming-&-stable.png";
 import riderApparelImg from "../assets/rider-&-apparel.png";
+
+// ── ZoOwill Product Images ────────────────────────────────────
 import zoowilgroominganimalbrushImg from "../assets/zoowil-grooming-animal-brush.png";
 import zoowilblackridingbreechesImg from "../assets/zoowil-black-riding_breeches.png";
-import zoowilblackhorsehoofbootsImg from "../assets/zoowil-black-horse-hoof-boots.png";
+import zoowilblackhorsehoofbootsImg from "../assets/zoowil-black-horse-hoof-boots.webp";
 import zoowilhorseandcowmetalbrushImg from "../assets/zoowil-horse-cow-metal-grooming-brush.png";
 
 export const FALLBACK_IMG =
