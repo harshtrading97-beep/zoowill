@@ -20,6 +20,15 @@ export default function FeaturedCatalogue({ onView }) {
   const sectionRef = useRef(null);
   const gridRef    = useRef(null);
 
+  // Listen for category jumps triggered by SearchOverlay pills
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.detail) setActiveCategory(e.detail);
+    };
+    window.addEventListener("zw:filterCategory", handler);
+    return () => window.removeEventListener("zw:filterCategory", handler);
+  }, []);
+
   let filtered = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
   if (sort === "price-asc")  filtered = [...filtered].sort((a, b) => a.priceINR - b.priceINR);
   if (sort === "price-desc") filtered = [...filtered].sort((a, b) => b.priceINR - a.priceINR);
@@ -50,11 +59,14 @@ export default function FeaturedCatalogue({ onView }) {
         {/* Header */}
         <div className="feat-heading" style={{ marginBottom: 44 }}>
           <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#D44515", display: "block", marginBottom: 10 }}>
-            59+ Specialized SKUs
+            THE ZOOWILL COLLECTION
           </span>
-          <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(34px,5vw,58px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.1 }}>
-            Featured Catalogue
+          <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(34px,5vw,58px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.1, marginBottom: 14 }}>
+            Explore the Full Range
           </h2>
+          <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, color: "#736B65", lineHeight: 1.65, maxWidth: 640 }}>
+            From traditional saddlery to everyday stable essentials, discover equestrian products for a wide range of riding and horse-care needs.
+          </p>
         </div>
 
         {/* Controls */}
@@ -97,14 +109,32 @@ export default function FeaturedCatalogue({ onView }) {
           </div>
         </div>
 
-        {/* Grid */}
-        <div ref={gridRef} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 24 }}>
-          {filtered.map(product => (
-            <div key={product.id} className="prod-card-wrap">
-              <ProductCard product={product} onView={onView} />
-            </div>
-          ))}
-        </div>
+        {/* Grid or Empty State */}
+        {filtered.length > 0 ? (
+          <div ref={gridRef} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 24 }}>
+            {filtered.map(product => (
+              <div key={product.id} className="prod-card-wrap">
+                <ProductCard product={product} onView={onView} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div style={{ textAlign: "center", padding: "64px 20px", background: "white", borderRadius: 20, border: "1px solid rgba(231,174,175,0.3)", maxWidth: 540, margin: "0 auto" }}>
+            <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 28, fontWeight: 300, color: "#1A1715", marginBottom: 10 }}>
+              Explore the ZoOwill Collection
+            </h3>
+            <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#736B65", marginBottom: 24, lineHeight: 1.6 }}>
+              Discover saddlery, riding equipment and everyday essentials for horses and stables.
+            </p>
+            <button
+              onClick={() => setActiveCategory("all")}
+              className="btn btn-dark"
+              style={{ padding: "10px 24px", fontSize: 11 }}
+            >
+              View All Products
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

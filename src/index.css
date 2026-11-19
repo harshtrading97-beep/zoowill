@@ -1,5 +1,5 @@
 /* ZoOwill — Global CSS · Tailwind v4 @theme · Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -39,10 +39,14 @@ html.lenis { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-champagne); border-radius: 2px; }
+/* ── Scrollbar ──────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-champagne); border-radius: 100px; }
+
+/* ══════════════════════════════════════
+   BUTTON DESIGN SYSTEM — Luxury Tier
+   ══════════════════════════════════════ */
 
 /* ── Button base ───────────────────── */
 .btn {
@@ -50,19 +54,73 @@ html.lenis { height: auto; }
   padding: 13px 28px;
   border-radius: 100px;
   font-family: var(--font-ui);
-  font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   cursor: pointer; text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.32s cubic-bezier(0.22,1,0.36,1);
   border: none; outline: none;
+  position: relative;
+  user-select: none;
 }
-.btn-dark  { background: var(--color-ink);        color: #FAF8F5; }
-.btn-dark:hover { background: var(--color-terracotta); }
-.btn-terra { background: var(--color-terracotta);  color: white; }
-.btn-terra:hover { background: #E24903; }
-.btn-ghost { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(12px); }
-.btn-ghost:hover { background: white; color: var(--color-ink); }
-.btn-outline { background: transparent; color: var(--color-ink); border: 1px solid rgba(231,174,175,0.6); }
-.btn-outline:hover { background: var(--color-terracotta); color: white; border-color: var(--color-terracotta); }
+.btn:active { transform: scale(0.96); transition-duration: 0.1s; }
+
+/* Arrow / icon inside button — slides on hover */
+.btn svg { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+.btn:hover svg { transform: translateX(3px); }
+
+/* ── Dark (Espresso) ──────────────── */
+.btn-dark  {
+  background: var(--color-ink); color: #FAF8F5;
+  box-shadow: 0 4px 14px -4px rgba(26,23,21,0.3);
+}
+.btn-dark:hover {
+  background: var(--color-terracotta);
+  box-shadow: 0 10px 28px -6px rgba(212,69,21,0.4);
+  transform: translateY(-2px);
+}
+.btn-dark:active { transform: translateY(0) scale(0.96); }
+
+/* ── Terracotta (Primary CTA) ─────── */
+.btn-terra {
+  background: var(--color-terracotta); color: white;
+  box-shadow: 0 4px 18px -4px rgba(212,69,21,0.45);
+}
+.btn-terra:hover {
+  background: #C03911;
+  box-shadow: 0 12px 32px -6px rgba(212,69,21,0.5);
+  transform: translateY(-2px) scale(1.02);
+}
+.btn-terra:active { transform: translateY(0) scale(0.96); }
+
+/* ── Ghost (Hero / Banner) ─────────── */
+.btn-ghost {
+  background: rgba(255,255,255,0.14); color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.btn-ghost:hover {
+  background: white; color: var(--color-ink);
+  box-shadow: 0 8px 24px -4px rgba(26,23,21,0.15);
+  transform: translateY(-2px);
+}
+.btn-ghost:active { transform: translateY(0) scale(0.96); }
+
+/* ── Outline (Secondary) ─────────── */
+.btn-outline {
+  background: transparent; color: var(--color-ink);
+  border: 1.5px solid rgba(231,174,175,0.6);
+}
+.btn-outline:hover {
+  background: var(--color-terracotta); color: white;
+  border-color: var(--color-terracotta);
+  box-shadow: 0 8px 24px -6px rgba(212,69,21,0.35);
+  transform: translateY(-2px);
+}
+.btn-outline:active { transform: translateY(0) scale(0.96); }
+
+/* ══════════════════════════════════════
+   COMPONENT STYLES
+   ══════════════════════════════════════ */
 
 /* ── Badge ─────────────────────────── */
 .badge {
@@ -91,31 +149,30 @@ html.lenis { height: auto; }
   box-shadow: 0 25px 60px -15px rgba(28,25,23,0.07);
   opacity: 0; pointer-events: none;
   transform: translateY(-6px);
-  transition: all 0.3s cubic-bezier(0.76,0,0.24,1);
+  transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
   z-index: 100;
 }
 .mega-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
 
-/* ── Search overlay ────────────────── */
+/* ── Search overlay (CSS class for legacy — component uses inline) ── */
 .search-overlay {
   position: fixed; inset: 0;
-  background: rgba(250,248,245,0.96);
-  backdrop-filter: blur(20px);
-  z-index: 999;
+  background: rgba(26,23,21,0.52);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 9999;
   display: flex; flex-direction: column; align-items: center;
-  padding-top: 160px;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.3s ease;
+  padding-top: 10vh;
+  overflow-y: auto;
 }
-.search-overlay.open { opacity: 1; pointer-events: all; }
 
 /* ── Drawer ────────────────────────── */
 .drawer {
-  position: fixed; top: 0; right: 0; height: 100vh; width: 420px; max-width: 100vw;
+  position: fixed; top: 0; left: 0; height: 100vh; width: 340px; max-width: 85vw;
   background: var(--color-bg); z-index: 1001;
-  box-shadow: -20px 0 60px -10px rgba(28,25,23,0.1);
-  transform: translateX(100%);
-  transition: transform 0.45s cubic-bezier(0.76,0,0.24,1);
+  box-shadow: 20px 0 60px -10px rgba(28,25,23,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
   overflow-y: auto;
 }
 .drawer.open { transform: translateX(0); }
@@ -123,25 +180,33 @@ html.lenis { height: auto; }
 /* ── Modal overlay ─────────────────── */
 .modal-overlay {
   position: fixed; inset: 0;
-  background: rgba(26,23,21,0.45);
-  backdrop-filter: blur(5px);
+  background: rgba(26,23,21,0.52);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
   display: flex; align-items: center; justify-content: center;
   padding: 20px;
+  overflow-y: auto;
 }
 
 /* ── Size pill ─────────────────────── */
 .size-pill {
-  padding: 4px 10px;
+  padding: 5px 12px;
   border: 1px solid rgba(26,23,21,0.14);
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
-  cursor: pointer; transition: all 0.2s ease;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
   font-family: var(--font-ui);
   background: transparent; color: var(--color-ink);
 }
-.size-pill:hover, .size-pill.active {
+.size-pill:hover {
+  border-color: var(--color-ink);
+  background: rgba(26,23,21,0.04);
+}
+.size-pill.active {
   background: var(--color-ink); color: white; border-color: var(--color-ink);
+  transform: scale(1.05);
 }
 
 /* ── Filter tab ────────────────────── */
@@ -149,37 +214,85 @@ html.lenis { height: auto; }
   padding: 8px 18px; border-radius: 100px;
   font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
   cursor: pointer; border: 1px solid rgba(26,23,21,0.1);
-  transition: all 0.25s ease; white-space: nowrap;
-  font-family: var(--font-ui); background: transparent; color: var(--color-muted);
+  transition: all 0.28s cubic-bezier(0.22,1,0.36,1); white-space: nowrap;
+  font-family: var(--font-ui); background: white; color: var(--color-muted);
 }
-.filter-tab:hover { color: var(--color-ink); border-color: rgba(26,23,21,0.25); }
-.filter-tab.active { background: var(--color-ink); color: white; border-color: var(--color-ink); }
+.filter-tab:hover {
+  color: var(--color-ink);
+  border-color: rgba(26,23,21,0.28);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -4px rgba(26,23,21,0.08);
+}
+.filter-tab.active {
+  background: var(--color-ink); color: white; border-color: var(--color-ink);
+  box-shadow: 0 6px 18px -4px rgba(26,23,21,0.2);
+  transform: translateY(-1px);
+}
 
 /* ── Color swatch ──────────────────── */
 .color-swatch {
   width: 14px; height: 14px; border-radius: 50%; cursor: pointer;
   border: 2px solid transparent; outline: 2px solid transparent; outline-offset: 1px;
-  transition: all 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
 }
-.color-swatch:hover, .color-swatch.active {
+.color-swatch:hover {
+  transform: scale(1.15);
+  outline-color: var(--color-champagne);
+}
+.color-swatch.active {
   outline-color: var(--color-ink);
+  transform: scale(1.1);
 }
 
-/* ── Product card hover overlay ─────── */
+/* ── Product card hover overlay ────── */
 .product-card { position: relative; }
 .prod-hover-overlay {
   position: absolute; inset: 0;
-  background: rgba(26,23,21,0.35);
+  background: rgba(26,23,21,0.32);
   border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity 0.3s ease;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.22,1,0.36,1);
   pointer-events: none;
 }
 .product-card:hover .prod-hover-overlay { opacity: 1; pointer-events: all; }
 
-/* ── Hero progress bar ─────────────── */
+/* ══════════════════════════════════════
+   KEYFRAME ANIMATIONS
+   ══════════════════════════════════════ */
+
+/* Hero progress bar */
 @keyframes progressFill { from { width: 0% } to { width: 100% } }
 .hero-progress { animation: progressFill 2.5s linear forwards; }
 
+/* Modal entrance */
+@keyframes zwModalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(16px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+@keyframes zwBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Search overlay slide-down */
+@keyframes zwSearchIn {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Generic fade-in */
+@keyframes zwFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ── Reveal animations ─────────────── */
 .reveal-up { opacity: 0; transform: translateY(28px); }
+
+/* ── Responsive helpers ────────────── */
+@media (max-width: 768px) {
+  .hidden.md\:flex, .hidden.md\:inline-flex, .hidden.md\:inline {
+    display: none !important;
+  }
+}

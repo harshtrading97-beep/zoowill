@@ -47,14 +47,14 @@ export default function BrandHeritage() {
           <div style={{
             position: "absolute", bottom: 32, right: -16,
             background: "#FAF8F5", border: "1px solid rgba(231,174,175,0.4)", borderRadius: 16,
-            padding: "20px 24px", boxShadow: "0 8px 32px -4px rgba(26,23,21,0.1)", maxWidth: 196,
+            padding: "20px 24px", boxShadow: "0 8px 32px -4px rgba(26,23,21,0.1)", maxWidth: 210,
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
               <Award size={16} strokeWidth={1.5} style={{ color: "#D44515" }} />
-              <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#D44515" }}>Heritage Quality</span>
+              <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#D44515" }}>Indian Craftsmanship</span>
             </div>
-            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 20, fontWeight: 400, color: "#1A1715", lineHeight: 1.2 }}>
-              59+ Specialized Equestrian SKUs
+            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 19, fontWeight: 400, color: "#1A1715", lineHeight: 1.25 }}>
+              Equestrian Equipment &amp; Saddlery
             </p>
           </div>
         </div>
@@ -62,30 +62,36 @@ export default function BrandHeritage() {
         {/* Text column */}
         <div ref={textRef}>
           <div className="reveal-line" style={{ marginBottom: 14 }}>
-            <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#D44515" }}>Our Heritage</span>
+            <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#D44515" }}>THE STORY OF ZOOWILL</span>
           </div>
-          <h2 className="reveal-line" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(32px,4vw,54px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.1, marginBottom: 26 }}>
-            Where Tradition Meets International Excellence
+          <h2 className="reveal-line" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(32px,4vw,54px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.12, marginBottom: 26 }}>
+            Where Indian Saddlery Meets the World of Equestrianism.
           </h2>
           <p className="reveal-line" style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14.5, lineHeight: 1.75, color: "#736B65", marginBottom: 18 }}>
-            ZoOwill is a premier international equestrian brand rooted in India's rich saddlery traditions. Our artisans — many trained in the legendary workshops of Kashmir and Aligarh — bring centuries-old craftsmanship to every piece of tack we produce.
+            ZoOwill brings together a diverse range of equestrian equipment inspired by India's longstanding saddlery traditions and the practical needs of today's riders. Our collection spans traditional Kashmiri Kathis, leather harnesses, riding saddles and essential equipment for horse and stable care.
           </p>
           <p className="reveal-line" style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14.5, lineHeight: 1.75, color: "#736B65", marginBottom: 32 }}>
-            From ornate brass-fitted <em>Kashmiri Kathis</em> and hand-forged <em>Aligarh Rakabs</em> to precision dressage saddles and internationally certified leather harnesses — every ZoOwill product is crafted to exceed global equestrian standards and exported worldwide.
+            From the distinctive detailing of brass-fitted Kathis and the traditional form of Aligarh Rakabs to contemporary riding essentials, the collection reflects the variety of India's equestrian craftsmanship. Each product is presented with its intended use, available options and specifications to help customers make informed choices.
           </p>
 
           {/* Stats */}
-          <div className="reveal-line" style={{ display: "flex", gap: 44, marginBottom: 36 }}>
-            {[{ num: "59+", label: "Unique SKUs" }, { num: "7", label: "Collections" }, { num: "100%", label: "Export Ready" }].map(stat => (
+          <div className="reveal-line" style={{ display: "flex", gap: 44, marginBottom: 36, flexWrap: "wrap" }}>
+            {[
+              { num: "113", label: "Official Products" },
+              { num: "8", label: "Product Collections" },
+              { num: "India", label: "Place of Origin" },
+            ].map(stat => (
               <div key={stat.label}>
-                <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 40, fontWeight: 300, color: "#1A1715", lineHeight: 1 }}>{stat.num}</p>
-                <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#736B65", marginTop: 4 }}>{stat.label}</p>
+                <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 38, fontWeight: 300, color: "#1A1715", lineHeight: 1 }}>{stat.num}</p>
+                <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#736B65", marginTop: 6 }}>{stat.label}</p>
               </div>
             ))}
           </div>
 
           <div className="reveal-line">
-            <a href="#contact" className="btn btn-dark" style={{ textDecoration: "none" }}>Request Full Catalogue</a>
+            <a href="#featured" className="btn btn-dark" style={{ textDecoration: "none" }}>
+              Discover the ZoOwill Collection <span style={{ transition: "transform 0.3s" }}>→</span>
+            </a>
           </div>
         </div>
       </div>

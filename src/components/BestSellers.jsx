@@ -31,17 +31,20 @@ export default function BestSellers({ onView }) {
       overflow: "hidden",
     }}>
       {/* Header */}
-      <div className="bs-heading" style={{ padding: "0 20px", maxWidth: 1280, margin: "0 auto 44px", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
-        <div>
+      <div className="bs-heading" style={{ padding: "0 20px", maxWidth: 1280, margin: "0 auto 44px", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 20 }}>
+        <div style={{ maxWidth: 640 }}>
           <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#D44515", display: "block", marginBottom: 10 }}>
-            Highest Demand
+            CUSTOMER FAVOURITES
           </span>
-          <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(34px,5vw,58px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.1 }}>
-            Best Sellers
+          <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(34px,5vw,58px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.1, marginBottom: 14 }}>
+            Frequently Explored
           </h2>
+          <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, color: "#736B65", lineHeight: 1.65 }}>
+            Discover some of the standout pieces from the ZoOwill catalogue, from traditional saddles and leather harnesses to essential equipment for everyday riding and horse care.
+          </p>
         </div>
-        <a href="#featured" style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1A1715", textDecoration: "none" }}>
-          View All <ArrowRight size={14} strokeWidth={1.5} />
+        <a href="#featured" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1A1715", textDecoration: "none", padding: "10px 20px", borderRadius: 100, border: "1px solid rgba(231,174,175,0.6)", background: "white", transition: "all 0.25s" }}>
+          Explore All Products <ArrowRight size={13} strokeWidth={1.5} />
         </a>
       </div>
 
@@ -53,16 +56,19 @@ export default function BestSellers({ onView }) {
             style={{
               flexShrink: 0, width: 256, borderRadius: 18, overflow: "hidden",
               background: "white", border: "1px solid rgba(231,174,175,0.3)",
-              cursor: "pointer", transition: "transform 0.3s ease, box-shadow 0.3s ease",
+              cursor: "pointer",
+              transition: "all 0.42s cubic-bezier(0.22,1,0.36,1)",
               boxShadow: "0 4px 20px -6px rgba(26,23,21,0.07)",
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 16px 40px -8px rgba(26,23,21,0.12)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 20px -6px rgba(26,23,21,0.07)"; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 50px -8px rgba(26,23,21,0.14)"; e.currentTarget.style.borderColor = "rgba(212,69,21,0.35)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 20px -6px rgba(26,23,21,0.07)"; e.currentTarget.style.borderColor = "rgba(231,174,175,0.3)"; }}
           >
             {/* Image */}
             <div style={{ position: "relative", height: 200, background: "#F3EFEA", overflow: "hidden" }}>
               <img src={product.image} alt={product.name} onError={handleImageError}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.65s cubic-bezier(0.22,1,0.36,1)" }}
+                onMouseEnter={e => e.target.style.transform = "scale(1.06)"}
+                onMouseLeave={e => e.target.style.transform = "scale(1)"} />
               {/* Rank badge */}
               <div style={{
                 position: "absolute", top: 12, left: 12, width: 32, height: 32,
@@ -90,11 +96,11 @@ export default function BestSellers({ onView }) {
                     padding: "6px 14px", borderRadius: 100,
                     background: "#FAF8F5", border: "1px solid rgba(231,174,175,0.6)",
                     color: "#1A1715", cursor: "pointer",
-                    fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 10, fontWeight: 500, letterSpacing: "0.08em",
-                    transition: "all 0.25s ease",
+                    fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.08em",
+                    transition: "all 0.28s cubic-bezier(0.22,1,0.36,1)",
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "#D44515"; e.currentTarget.style.color = "white"; e.currentTarget.style.borderColor = "#D44515"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "#FAF8F5"; e.currentTarget.style.color = "#1A1715"; e.currentTarget.style.borderColor = "rgba(231,174,175,0.6)"; }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#D44515"; e.currentTarget.style.color = "white"; e.currentTarget.style.borderColor = "#D44515"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 14px -4px rgba(212,69,21,0.35)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "#FAF8F5"; e.currentTarget.style.color = "#1A1715"; e.currentTarget.style.borderColor = "rgba(231,174,175,0.6)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
                 >
                   View Details →
                 </button>

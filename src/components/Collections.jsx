@@ -10,17 +10,17 @@ gsap.registerPlugin(ScrollTrigger);
 const COLLECTIONS = [
   {
     num: "01",
-    title: "The Royal Harness\n& Dressage Edit",
-    sub: "Leather harness sets, dressage saddles, Kashmiri Kathis & crystal browbands",
+    title: "The Saddlery\n& Harness Edit",
+    sub: "A selection of riding saddles, traditional Kashmiri Kathis, leather harness sets and distinctive equestrian accessories.",
     image: "https://images.unsplash.com/photo-1551884831-bbf3cdc6469e?auto=format&fit=crop&w=1000&q=85",
-    cta: "Explore Collection", href: "#featured",
+    cta: "Explore the Collection", href: "#featured",
   },
   {
     num: "02",
-    title: "Endurance, Kathi\n& Stable Essentials",
-    sub: "Endurance saddles, stable halters, grooming tools & feeding accessories",
+    title: "The Horse & Stable\nEssentials Edit",
+    sub: "Everyday essentials for horse care and stable routines, including halters, leads, grooming accessories, turnout rugs and protective equipment.",
     image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1000&q=85",
-    cta: "Shop Essentials", href: "#featured",
+    cta: "Shop Horse Essentials", href: "#featured",
   },
 ];
 
@@ -42,10 +42,10 @@ export default function Collections() {
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 52 }}>
           <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#D44515", display: "block", marginBottom: 10 }}>
-            Curated Lookbook
+            SELECTED FOR THE EQUESTRIAN LIFESTYLE
           </span>
           <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(34px,5vw,58px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.1 }}>
-            Curated Collections
+            Explore by Collection
           </h2>
         </div>
 
@@ -79,13 +79,15 @@ export default function Collections() {
                 <a href={coll.href}
                   style={{
                     display: "inline-flex", alignItems: "center", gap: 7,
-                    padding: "10px 20px", background: "white", color: "#1A1715",
+                    padding: "11px 22px", background: "white", color: "#1A1715",
                     border: "none", borderRadius: 100,
-                    fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: "0.08em",
-                    textDecoration: "none", transition: "all 0.3s ease",
+                    fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.08em",
+                    textDecoration: "none",
+                    transition: "all 0.3s cubic-bezier(0.22,1,0.36,1)",
+                    boxShadow: "0 4px 14px -4px rgba(26,23,21,0.15)",
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "#D44515"; e.currentTarget.style.color = "white"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "white"; e.currentTarget.style.color = "#1A1715"; }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "#D44515"; e.currentTarget.style.color = "white"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 28px -4px rgba(212,69,21,0.4)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "white"; e.currentTarget.style.color = "#1A1715"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 14px -4px rgba(26,23,21,0.15)"; }}
                 >
                   {coll.cta} <ArrowUpRight size={13} strokeWidth={1.5} />
                 </a>

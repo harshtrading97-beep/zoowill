@@ -6,29 +6,29 @@ import { handleImageError } from "../data/products";
 const SLIDES = [
   {
     num: "01",
-    eyebrow: "Handcrafted Saddles & Leather Harnesses",
-    headline: ["Artistry in", "Every Stitch", "& Stride"],
-    sub: "59+ specialized equestrian SKUs — from bespoke leather harnesses to ornate Kashmiri Kathis, all handcrafted for the global arena.",
-    cta1: { label: "Explore Collection", href: "#featured" },
-    cta2: { label: "View Best Sellers",  href: "#bestsellers" },
+    eyebrow: "INDIAN SADDLEMAKING & EQUESTRIAN CRAFT",
+    headline: ["Crafted with Purpose.", "Made for Every Ride."],
+    sub: "Discover a considered collection of saddles, leather harnesses and equestrian essentials, bringing together traditional Indian craftsmanship and the needs of modern horse care.",
+    cta1: { label: "Explore the Collection", href: "#featured" },
+    cta2: { label: "Discover Best Sellers",  href: "#bestsellers" },
     image: "https://images.unsplash.com/photo-1566251037378-5e04e3bec343?auto=format&fit=crop&w=1600&q=85",
   },
   {
     num: "02",
-    eyebrow: "Dressage, Jumping & Kashmiri Kathis",
-    headline: ["Built for", "Endurance &", "The Arena"],
-    sub: "Precision-engineered saddles and international-grade tack trusted by competitive riders and export buyers worldwide.",
-    cta1: { label: "Explore Collection", href: "#featured" },
-    cta2: { label: "View Best Sellers",  href: "#bestsellers" },
+    eyebrow: "FOR THE ARENA, THE TRACK & BEYOND",
+    headline: ["Ready for the", "Ride Ahead."],
+    sub: "From dressage and jumping saddles to endurance and racing equipment, explore riding essentials designed for different disciplines and equestrian pursuits.",
+    cta1: { label: "Explore Riding Equipment", href: "#featured" },
+    cta2: { label: "Browse Saddlery",           href: "#featured" },
     image: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1600&q=85",
   },
   {
     num: "03",
-    eyebrow: "Turnout Blankets, Halters & Grooming Gear",
-    headline: ["Complete Stable", "& Horse", "Care"],
-    sub: "Everything your stable needs — from waterproof turnout rugs to padded nylon halters and hand-forged Aligarh Rakabs.",
-    cta1: { label: "Shop Stable",        href: "#featured" },
-    cta2: { label: "View Best Sellers",  href: "#bestsellers" },
+    eyebrow: "ESSENTIALS FOR EVERY STABLE",
+    headline: ["Thoughtful Care.", "From Head to Hoof."],
+    sub: "Explore practical essentials for everyday horse care, including turnout rugs, halters, grooming tools, protective gear and stable accessories.",
+    cta1: { label: "Explore Horse Care",  href: "#featured" },
+    cta2: { label: "View the Catalogue",  href: "#featured" },
     image: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=1600&q=85",
   },
 ];
@@ -167,11 +167,13 @@ export default function HeroSlider() {
 
           {/* CTAs */}
           <div className="hero-ctas" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href={slide.cta1.href} className="btn btn-terra" style={{ fontSize: 11, letterSpacing: "0.14em" }}>
+            <a href={slide.cta1.href} className="btn btn-terra"
+              style={{ fontSize: 11, letterSpacing: "0.14em", boxShadow: "0 6px 24px -4px rgba(212,69,21,0.5)" }}>
               {slide.cta1.label} <ArrowRight size={13} strokeWidth={1.5} />
             </a>
-            <a href={slide.cta2.href} className="btn btn-ghost" style={{ fontSize: 11, letterSpacing: "0.14em" }}>
-              {slide.cta2.label}
+            <a href={slide.cta2.href} className="btn btn-ghost"
+              style={{ fontSize: 11, letterSpacing: "0.14em" }}>
+              {slide.cta2.label} <ArrowRight size={13} strokeWidth={1.5} />
             </a>
           </div>
         </div>
@@ -195,13 +197,15 @@ export default function HeroSlider() {
               position: "absolute", top: "50%", [side]: 20,
               transform: "translateY(-50%)",
               background: "rgba(255,255,255,0.14)", backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
               border: "1px solid rgba(255,255,255,0.25)",
-              borderRadius: "50%", width: 44, height: 44,
+              borderRadius: "50%", width: 46, height: 46,
               display: "flex", alignItems: "center", justifyContent: "center",
-              cursor: "pointer", color: "white", transition: "all 0.25s ease",
+              cursor: "pointer", color: "white",
+              transition: "all 0.3s cubic-bezier(0.22,1,0.36,1)",
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.3)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.3)"; e.currentTarget.style.transform = "translateY(-50%) scale(1.08)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; e.currentTarget.style.transform = "translateY(-50%) scale(1)"; }}
           >
             <Icon size={18} strokeWidth={1.5} />
           </button>

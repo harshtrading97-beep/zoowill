@@ -6,77 +6,88 @@ import SearchOverlay from "./SearchOverlay";
 
 const NAV_ITEMS = [
   {
-    label: "HORSE",
+    label: "SADDLES & KATHIS",
+    category: "saddles",
     sub: [
-      { heading: "Blankets & Turnout Rugs",   items: ['75" Fleece Winter Turnout Rug', "Jhool"] },
-      { heading: "Boots & Leg Bandages",       items: ["Bell Boots", "Fleece Bandages", '4" White Bandages'] },
-      { heading: "Fly & Head Protection",      items: ["Fly Veil Ear Bonnet", "Blinker Hood Mask"] },
-      { heading: "Muzzles & Ornaments",        items: ["Rubber Muzzle with Fur", "Decorative Horse Kalngi"] },
+      { heading: "English & Polo Saddles", items: ['Leather Dressage 18"', "Jumping Saddle", "Polo Heavy Duty Saddle", "Bareback Pad Saddle Set"] },
+      { heading: "Kashmiri Kathis", items: ["Printed Brass Fitting Kathi", 'Plain Leather Kathi 17"', "Handle Support Kathi", "Fleece Lined Panels"] },
     ],
-    featured: { title: "Winter Ready", sub: "Turnout Rugs & Protection",
-      img: "https://images.unsplash.com/photo-1450052590821-8bf91254a353?auto=format&fit=crop&w=600&q=85" },
-  },
-  {
-    label: "SADDLERY",
-    sub: [
-      { heading: "English & Dressage Saddles", items: ['Leather Dressage 18"', "Jumping Saddle", "Polo Heavy Duty Saddle"] },
-      { heading: "Kashmiri Kathis",             items: ["Brass Fitting Thappa", 'Plain & Natural 15"/17"', "Handle Kathi"] },
-      { heading: "Bridles & Browbands",         items: ["Leather Bridle with Reins", "PVC Bridle & Martingale", "Crystal Browband"] },
-      { heading: "Bits & Stirrups",             items: ["H-Style Bit", "4-Ring Bit", "Aligarh Iron Rakab"] },
-    ],
-    featured: { title: "Master Craft", sub: "Handcrafted Leather Saddles",
+    featured: { title: "Artisan Saddlery", sub: "Kashmiri Kathis & Dressage Saddles",
       img: "https://images.unsplash.com/photo-1566251037378-5e04e3bec343?auto=format&fit=crop&w=600&q=85" },
   },
   {
-    label: "HARNESS",
+    label: "HARNESSES",
+    category: "harnesses",
     sub: [
-      { heading: "Single Horse Leather Harness", items: ["Cob Size", "Large Size"] },
-      { heading: "Double Horse Leather Harness", items: ["Cob Size", "Large Size"] },
+      { heading: "Heavy Driving Harnesses", items: ["Single Horse Leather Harness (Cob)", "Double Horse Leather Harness (Cob)", "Heavy Driving Set with Bridle & Reins"] },
     ],
-    featured: { title: "Heritage Harness", sub: "Single & Double Sets",
+    featured: { title: "Leather Harnesses", sub: "Single & Double Driving Sets",
       img: "https://images.unsplash.com/photo-1551884831-bbf3cdc6469e?auto=format&fit=crop&w=600&q=85" },
   },
   {
-    label: "RIDER",
+    label: "BRIDLES & BITS",
+    category: "bridles",
     sub: [
-      { heading: "Riding Apparel", items: ["Unisex Riding Breeches – 32/34/36"] },
-      { heading: "Spurs & Whips",  items: ['Stainless Steel Spurs', 'Fiber Spurs', '42" Riding Stick', '27" Riding Stick'] },
+      { heading: "Bridles & Martingales", items: ["Leather Bridle with Crystal Browband", "Biothane Synthetic Bridle", "Leather Breastplate with Reins", "Seeneband Chest Collar"] },
+      { heading: "Stainless Steel & Iron Bits", items: ["Loose Ring Snaffle Bit", "Chifney Snaffle Bit", "Springkandare with Curb Chain", "Rubber Mouthpiece Bit", "Dual Ring Snaffle Bit"] },
     ],
-    featured: { title: "The Rider Edit", sub: "Apparel & Accessories",
-      img: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=600&q=85" },
-  },
-  {
-    label: "ENDURANCE & RACING",
-    sub: [
-      { heading: "Saddles",                    items: ["Endurance Saddle", "Exercise Racing Saddle", "Status Saddle Set"] },
-      { heading: "Lightweight Synthetic Tack", items: ["Biothane Nylon Stirrup Belt", "PVC Tack"] },
-    ],
-    featured: { title: "Race Ready", sub: "Endurance & Sprint Gear",
-      img: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=600&q=85" },
-  },
-  {
-    label: "PONY & FOAL",
-    sub: [
-      { heading: "Pony & Foal Halters",  items: ["Padded Nylon – Pony", "Padded Nylon – Foal", "Padded Nylon – Cob"] },
-      { heading: "Small Bits & Leads",   items: ["Small Twisted Mouth Bit", "Double Colour Lead", "Snap Lead"] },
-    ],
-    featured: { title: "Young Ones", sub: "Pony & Foal Essentials",
+    featured: { title: "Bridles & Bits", sub: "Precision Tack & Stainless Steel",
       img: "https://images.unsplash.com/photo-1509914398892-963f53e6e2f1?auto=format&fit=crop&w=600&q=85" },
   },
   {
-    label: "STABLE",
+    label: "HALTERS & LEADS",
+    category: "halters",
     sub: [
-      { heading: "Halters & Leads",      items: ["Simple Nylon Halter", "8m Cotton-Nylon Lead", "Silver-Brass Chain Lead"] },
-      { heading: "Grooming Tools",       items: ["6-Ring SS Hair Scraper Comb", "Rubber Grooming Gloves"] },
-      { heading: "Feeding & Hardware",   items: ["Chaara Hay Net Bag", "Nylon Collar Galkhor", "Safety Hooks & Clips"] },
+      { heading: "Nylon Padded Halters", items: ["Foal Halter for Baby Horse", "Glitter Horse Halter", "Aztec Pattern 3-Ply Halter", "Fleece Padded Halter"] },
+      { heading: "Rope & Chain Leads", items: ["10 Meter Flat Lead Rope", "8m Cotton-Nylon Handwoven Lead", "Heavy Duty Braided Leash", "Metal Swivel Snap Hook"] },
     ],
-    featured: { title: "Stable Essentials", sub: "Grooming & Feeding",
+    featured: { title: "Halters & Leads", sub: "Reinforced Webbing & Hardware",
+      img: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=600&q=85" },
+  },
+  {
+    label: "STIRRUPS & GIRTHS",
+    category: "stirrups",
+    sub: [
+      { heading: "Iron Rakabs & Stirrups", items: ["Aligarh Iron Rakkab", "Aluminium Safety Stirrups", "Leather Stirrup Straps 145cm", "Nylon Stirrup Belts"] },
+      { heading: "Girths & Saddle Pads", items: ["Nylon Fleece Girth", "Race Elastic Girth & Surcingles", "Leather Belly Girth 132cm", "Imported Anti-Slip Saddle Pad", "Quilted & Sweatfree Saddle Pad"] },
+    ],
+    featured: { title: "Stirrups & Girths", sub: "Aligarh Rakabs & Shock-Absorbing Pads",
+      img: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=600&q=85" },
+  },
+  {
+    label: "HORSE PROTECTION & RUGS",
+    category: "protection",
+    sub: [
+      { heading: "Winter Turnout Rugs / Jhool", items: ['75" Waterproof Winter Jhool', 'Neck Cover Turnout Rug', 'Fleece Fitted Rain Sheet', '200-250g Fill Winter Coat'] },
+      { heading: "Boots & Head Protection", items: ["Hoof Boots (S/M/L Sizes)", "Fleece Trim Bell Boots", "Cotton Leg Wraps Bandages", "Blinker Hood Mask with Eye Cups", "Fly Veil Ear Bonnet Sehra"] },
+    ],
+    featured: { title: "Protection & Rugs", sub: 'Waterproof 75" Jhool & Hoof Boots',
+      img: "https://images.unsplash.com/photo-1450052590821-8bf91254a353?auto=format&fit=crop&w=600&q=85" },
+  },
+  {
+    label: "GROOMING & STABLE",
+    category: "grooming",
+    sub: [
+      { heading: "Grooming Tools", items: ["Wooden Horse Grooming Brush", "Iron Kharara Massage Comb", "Rubber Curry Comb", "6-Ring Stainless Hair Scraper", "Hoof Pick Brush with Horse Head"] },
+      { heading: "Stable & Farrier Tools", items: ["Slow Feed Hay Net Bag", "Steel Horseshoes Naal (Full Set)", "Hoof Trimming Farrier Knife", "350W Electric Animal Clipper"] },
+    ],
+    featured: { title: "Grooming & Stable", sub: "Artisan Khararas & Grooming Essentials",
       img: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=600&q=85" },
   },
-  { label: "ABOUT", href: "#about" },
+  {
+    label: "RIDER & APPAREL",
+    category: "rider",
+    sub: [
+      { heading: "Rider Apparel & Armour", items: ["Unisex Riding Breeches Pant", "Body Protector Safety Vest", "Matte Black Protective Helmet", "Men & Women Leather Belt"] },
+      { heading: "Spurs & Accessories", items: ["Stainless Steel Riding Spurs", "Fiber Styles Riding Spurs with Straps", "Decorative Horse Plume Kalngi"] },
+    ],
+    featured: { title: "Rider Collection", sub: "Breeches, Vests & Spurs",
+      img: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=600&q=85" },
+  },
+  { label: "OUR STORY", href: "#about" },
 ];
 
-export default function Header({ onMobileMenuOpen }) {
+export default function Header({ onMobileMenuOpen, onViewProduct }) {
   const [scrolled, setScrolled]     = useState(false);
   const [activeMega, setActiveMega] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -109,13 +120,13 @@ export default function Header({ onMobileMenuOpen }) {
           padding: "8px 24px",
           display: "flex", alignItems: "center", justifyContent: "space-between",
         }}>
-          <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#736B65" }}>
-            ZoOwill Equestrian &bull; Handcrafted Indian Saddlery &amp; Tack
+          <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: "#736B65" }}>
+            Premium Equestrian Equipment | Retail &amp; Wholesale Enquiries Across India
           </span>
           <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-            <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#736B65" }}>59+ Specialized SKUs</span>
+            <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#736B65" }}>113 Official Products</span>
             <span style={{ width: 1, height: 12, background: "rgba(231,174,175,0.5)" }} />
-            <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#736B65" }}>PAN-India &amp; B2B Wholesale</span>
+            <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#736B65" }}>Indian Craftsmanship</span>
           </div>
         </div>
 
@@ -133,14 +144,15 @@ export default function Header({ onMobileMenuOpen }) {
               display: "flex", alignItems: "center", gap: 8,
               background: "white", border: "1px solid rgba(231,174,175,0.5)",
               borderRadius: 100, padding: "8px 16px",
-              cursor: "pointer", transition: "box-shadow 0.2s ease",
+              cursor: "pointer",
+              transition: "all 0.28s cubic-bezier(0.22,1,0.36,1)",
               fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 12, color: "#736B65",
             }}
-            onMouseEnter={e => e.currentTarget.style.boxShadow = "0 4px 16px -4px rgba(26,23,21,0.1)"}
-            onMouseLeave={e => e.currentTarget.style.boxShadow = "none"}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 6px 20px -4px rgba(26,23,21,0.1)"; e.currentTarget.style.borderColor = "rgba(212,69,21,0.3)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "rgba(231,174,175,0.5)"; e.currentTarget.style.transform = "translateY(0)"; }}
           >
-            <Search size={15} strokeWidth={1.5} />
-            <span className="hidden md:inline">Search catalogue…</span>
+            <Search size={15} strokeWidth={1.5} style={{ transition: "color 0.2s" }} />
+            <span className="hidden md:inline">Search products, saddles, tack &amp; more...</span>
           </button>
 
           {/* Logo */}
@@ -155,12 +167,12 @@ export default function Header({ onMobileMenuOpen }) {
           {/* Right: CTA + hamburger */}
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/916394549702?text=Hello%20ZoOwill%20Equestrian%2C%20I%20would%20like%20to%20enquire%20with%20you."
               target="_blank" rel="noopener noreferrer"
               className="btn btn-dark hidden md:inline-flex"
               style={{ padding: "10px 22px", fontSize: 11 }}
             >
-              Enquire Now
+              Enquire with Us
             </a>
             <button
               className="md:hidden"
@@ -217,7 +229,11 @@ export default function Header({ onMobileMenuOpen }) {
         ))}
       </header>
 
-      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SearchOverlay
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        onViewProduct={onViewProduct}
+      />
     </>
   );
 }

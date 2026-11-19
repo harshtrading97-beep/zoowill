@@ -24,19 +24,25 @@ export default function CategoryShowcase() {
   return (
     <section id="categories" ref={sectionRef} style={{ padding: "96px 20px", background: "#FAF8F5" }}>
       {/* Header */}
-      <div className="cat-heading" style={{ textAlign: "center", marginBottom: 52 }}>
+      <div className="cat-heading" style={{ textAlign: "center", marginBottom: 52, maxWidth: 680, margin: "0 auto 52px" }}>
         <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#D44515", display: "block", marginBottom: 10 }}>
-          Explore the Range
+          EXPLORE THE COLLECTIONS
         </span>
-        <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(34px,5vw,58px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.1 }}>
-          Shop by Category
+        <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(34px,5vw,58px)", fontWeight: 300, color: "#1A1715", lineHeight: 1.1, marginBottom: 14 }}>
+          Everything Your Horse Needs.
         </h2>
+        <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, color: "#736B65", lineHeight: 1.65 }}>
+          Explore our range of equestrian equipment, thoughtfully organised for riders, horses and stable essentials. Find the right equipment for your discipline, routine and requirements.
+        </p>
       </div>
 
       {/* Grid */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 18, maxWidth: 1280, margin: "0 auto" }}>
         {categoryShowcase.map((cat) => (
           <a key={cat.id} href="#featured" className="cat-card"
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent("zw:filterCategory", { detail: cat.id }));
+            }}
             style={{ display: "block", textDecoration: "none", borderRadius: 18, overflow: "hidden", background: "#F3EFEA", border: "1px solid rgba(231,174,175,0.35)", position: "relative", cursor: "pointer",
               transition: "transform 0.35s ease, box-shadow 0.35s ease",
               boxShadow: "0 4px 20px -6px rgba(26,23,21,0.07)" }}

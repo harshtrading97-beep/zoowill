@@ -1,6 +1,14 @@
 import { handleImageError } from "../data/products";
 
 export default function MegaMenu({ item, isOpen, onEnter, onLeave }) {
+  const handleClick = () => {
+    if (item.category) {
+      const el = document.getElementById("featured");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      window.dispatchEvent(new CustomEvent("zw:filterCategory", { detail: item.category }));
+    }
+  };
+
   return (
     <div className={`mega-menu ${isOpen ? "open" : ""}`} onMouseEnter={onEnter} onMouseLeave={onLeave}>
       <div style={{
@@ -17,7 +25,8 @@ export default function MegaMenu({ item, isOpen, onEnter, onLeave }) {
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
               {group.items.map((itm, ii) => (
                 <li key={ii}>
-                  <a href="#featured" style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#736B65", textDecoration: "none", transition: "color 0.2s ease" }}
+                  <a href="#featured" onClick={handleClick}
+                    style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#736B65", textDecoration: "none", transition: "color 0.2s ease" }}
                     onMouseEnter={e => e.target.style.color = "#1A1715"} onMouseLeave={e => e.target.style.color = "#736B65"}>
                     {itm}
                   </a>
@@ -28,7 +37,7 @@ export default function MegaMenu({ item, isOpen, onEnter, onLeave }) {
         ))}
 
         {item.featured && (
-          <div style={{ borderRadius: 14, overflow: "hidden", position: "relative", height: 200, background: "#F3EFEA" }}>
+          <div onClick={handleClick} style={{ borderRadius: 14, overflow: "hidden", position: "relative", height: 200, background: "#F3EFEA", cursor: "pointer" }}>
             <img src={item.featured.img} alt={item.featured.title} onError={handleImageError}
               style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(26,23,21,0.6), transparent)", padding: "16px" }}>
