@@ -2,21 +2,28 @@
 // Harsh International Knp
 // All 113 Verified Amazon India Listings · INR (₹) Only
 
-// ── Local Category & Product Images ──────────────────────────
-import saddlesKathisImg from "../assets/saddles_&-kathis.png";
-import harnessesImg from "../assets/harnesses.png";
-import bridlesBitsImg from "../assets/bridles-&-bits.png";
-import haltersLeadsImg from "../assets/halters-&-leads.png";
-import stirrupsGirthsImg from "../assets/stirrups-&-girths.png";
-import horseProtectionRugsImg from "../assets/horse-protection-&-rugs.png";
-import groomingStableImg from "../assets/grooming-&-stable.png";
-import riderApparelImg from "../assets/rider-&-apparel.png";
+// ── Local Category Images (WebP) ─────────────────────────────
+import saddlesKathisImg from "../assets/saddles_&-kathis.webp";
+import harnessesImg from "../assets/harnesses.webp";
+import bridlesBitsImg from "../assets/bridles-&-bits.webp";
+import haltersLeadsImg from "../assets/halters-&-leads.webp";
+import stirrupsGirthsImg from "../assets/stirrups-&-girths.webp";
+import horseProtectionRugsImg from "../assets/horse-protection-&-rugs.webp";
+import groomingStableImg from "../assets/grooming-&-stable.webp";
+import riderApparelImg from "../assets/rider-&-apparel.webp";
+
+// ── Hero Images (WebP) ────────────────────────────────────────
+import hero1Img from "../assets/hero1.webp";
+import hero2Img from "../assets/hero2.webp";
+import hero3Img from "../assets/hero3.webp";
+import hero4Img from "../assets/hero4.webp";
 
 // ── ZoOwill Product Images ────────────────────────────────────
 import zoowilgroominganimalbrushImg from "../assets/zoowil-grooming-animal-brush.png";
 import zoowilblackridingbreechesImg from "../assets/zoowil-black-riding_breeches.png";
 import zoowilblackhorsehoofbootsImg from "../assets/zoowil-black-horse-hoof-boots.webp";
 import zoowilhorseandcowmetalbrushImg from "../assets/zoowil-horse-cow-metal-grooming-brush.png";
+
 
 export const FALLBACK_IMG =
   "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1000&q=80";

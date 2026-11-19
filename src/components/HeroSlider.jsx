@@ -4,10 +4,10 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { handleImageError } from "../data/products";
 
 // Importing local images from src/assets as requested
-import hero1 from "../assets/hero1.png";
-import hero2 from "../assets/hero2.png";
-import hero3 from "../assets/hero3.png";
-import hero4 from "../assets/hero4.png";
+import hero1 from "../assets/hero1.webp";
+import hero2 from "../assets/hero2.webp";
+import hero3 from "../assets/hero3.webp";
+import hero4 from "../assets/hero4.webp";
 
 const SLIDES = [
   {
