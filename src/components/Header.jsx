@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Menu, X, ChevronDown } from "lucide-react";
-import ZoOwillLogo from "./Logo";
+import { Search, Menu, ChevronDown } from "lucide-react";
 import MegaMenu from "./MegaMenu";
 import SearchOverlay from "./SearchOverlay";
 
@@ -108,67 +107,167 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
     <>
       <header
         style={{
-          position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          paddingTop: "env(safe-area-inset-top, 0px)",
+          background: "#F3EFEA",
           transition: "box-shadow 0.3s ease",
-          boxShadow: scrolled ? "0 2px 24px -4px rgba(26,23,21,0.07)" : "none",
+          boxShadow: scrolled ? "0 2px 24px -4px rgba(26,23,21,0.08)" : "none",
         }}
       >
-        {/* ── Utility Bar ── */}
-        <div style={{
-          background: "#F3EFEA",
-          borderBottom: "1px solid rgba(231,174,175,0.4)",
-          padding: "8px 24px",
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-        }}>
-          <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: "#736B65" }}>
-            Premium Equestrian Equipment | Retail &amp; Wholesale Enquiries Across India
-          </span>
-          <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-            <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#736B65" }}>113 Official Products</span>
-            <span style={{ width: 1, height: 12, background: "rgba(231,174,175,0.5)" }} />
-            <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#736B65" }}>Indian Craftsmanship</span>
+        {/* ── Utility Bar (Mobile: Single-line clean | Desktop: Full 3-column) ── */}
+        <div
+          style={{
+            background: "#F3EFEA",
+            borderBottom: "1px solid rgba(231,174,175,0.4)",
+            padding: "6px 16px",
+          }}
+        >
+          {/* Mobile single-line bar */}
+          <div
+            className="flex md:hidden"
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontSize: 9.5,
+                fontWeight: 500,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#736B65",
+              }}
+            >
+              Retail &amp; Wholesale Across India · 113 Official Products
+            </span>
+          </div>
+
+          {/* Desktop full bar */}
+          <div
+            className="hidden md:flex"
+            style={{
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "2px 8px",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontSize: 11,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "#736B65",
+              }}
+            >
+              Premium Equestrian Equipment | Retail &amp; Wholesale Enquiries Across India
+            </span>
+            <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+              <span
+                style={{
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontSize: 11,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#736B65",
+                }}
+              >
+                113 Official Products
+              </span>
+              <span style={{ width: 1, height: 12, background: "rgba(231,174,175,0.5)" }} />
+              <span
+                style={{
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontSize: 11,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#736B65",
+                }}
+              >
+                Indian Craftsmanship
+              </span>
+            </div>
           </div>
         </div>
 
         {/* ── Main Header Row ── */}
-        <div style={{
-          background: scrolled ? "rgba(250,248,245,0.97)" : "rgba(250,248,245,0.92)",
-          backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(231,174,175,0.3)",
-          height: 72, padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between",
-        }}>
+        <div
+          style={{
+            background: scrolled ? "rgba(250,248,245,0.97)" : "rgba(250,248,245,0.94)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            borderBottom: "1px solid rgba(231,174,175,0.3)",
+            height: 64,
+            padding: "0 16px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           {/* Search pill */}
           <button
             onClick={() => setSearchOpen(true)}
+            aria-label="Open search"
             style={{
-              display: "flex", alignItems: "center", gap: 8,
-              background: "white", border: "1px solid rgba(231,174,175,0.5)",
-              borderRadius: 100, padding: "8px 16px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              background: "white",
+              border: "1px solid rgba(231,174,175,0.5)",
+              borderRadius: 100,
+              padding: "8px 14px",
               cursor: "pointer",
               transition: "all 0.28s cubic-bezier(0.22,1,0.36,1)",
-              fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 12, color: "#736B65",
+              fontFamily: "'Plus Jakarta Sans',sans-serif",
+              fontSize: 12,
+              color: "#736B65",
             }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 6px 20px -4px rgba(26,23,21,0.1)"; e.currentTarget.style.borderColor = "rgba(212,69,21,0.3)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = "rgba(231,174,175,0.5)"; e.currentTarget.style.transform = "translateY(0)"; }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = "0 6px 20px -4px rgba(26,23,21,0.1)";
+              e.currentTarget.style.borderColor = "rgba(212,69,21,0.3)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.borderColor = "rgba(231,174,175,0.5)";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
           >
-            <Search size={15} strokeWidth={1.5} style={{ transition: "color 0.2s" }} />
+            <Search size={15} strokeWidth={1.6} />
             <span className="hidden md:inline">Search products, saddles, tack &amp; more...</span>
           </button>
 
           {/* Logo */}
-          <a href="#" style={{ textDecoration: "none" }}>
+          <a href="#" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
             <img
               src="/logo.jpeg"
               alt="ZoOwill Equestrian"
-              style={{ height: 52, width: "auto", objectFit: "contain", mixBlendMode: "multiply", display: "block" }}
+              style={{
+                height: 44,
+                width: "auto",
+                objectFit: "contain",
+                mixBlendMode: "multiply",
+                display: "block",
+              }}
             />
           </a>
 
           {/* Right: CTA + hamburger */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <a
               href="https://wa.me/916394549702?text=Hello%20ZoOwill%20Equestrian%2C%20I%20would%20like%20to%20enquire%20with%20you."
-              target="_blank" rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-dark hidden md:inline-flex"
               style={{ padding: "10px 22px", fontSize: 11 }}
             >
@@ -177,18 +276,33 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
             <button
               className="md:hidden"
               onClick={onMobileMenuOpen}
-              style={{ background: "none", border: "none", cursor: "pointer", color: "#1A1715" }}
+              aria-label="Open menu"
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: "50%",
+                background: "white",
+                border: "1px solid rgba(231,174,175,0.5)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                color: "#1A1715",
+              }}
             >
-              <Menu size={22} strokeWidth={1.5} />
+              <Menu size={19} strokeWidth={1.6} />
             </button>
           </div>
         </div>
 
-        {/* ── Category Nav Bar ── */}
+        {/* ── Category Nav Bar (Desktop Only) ── */}
         <div
           className="hidden md:flex"
           style={{
-            alignItems: "center", justifyContent: "center", gap: 28, height: 44,
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 28,
+            height: 44,
             padding: "0 24px",
             background: "rgba(255,255,255,0.72)",
             borderBottom: "1px solid rgba(231,174,175,0.35)",
@@ -199,33 +313,69 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
           {NAV_ITEMS.map((item) =>
             item.href ? (
               <a
-                key={item.label} href={item.href}
-                style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1A1715", textDecoration: "none" }}
-                onMouseEnter={() => { clearTimeout(megaTimeout.current); setActiveMega(null); }}
-              >{item.label}</a>
+                key={item.label}
+                href={item.href}
+                style={{
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "#1A1715",
+                  textDecoration: "none",
+                }}
+                onMouseEnter={() => {
+                  clearTimeout(megaTimeout.current);
+                  setActiveMega(null);
+                }}
+              >
+                {item.label}
+              </a>
             ) : (
               <button
                 key={item.label}
                 onMouseEnter={() => handleNavEnter(item.label)}
                 style={{
-                  display: "flex", alignItems: "center", gap: 4,
-                  background: "none", border: "none", cursor: "pointer",
-                  fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, fontWeight: 500,
-                  letterSpacing: "0.16em", textTransform: "uppercase",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
                   color: activeMega === item.label ? "#D44515" : "#1A1715",
-                  transition: "color 0.2s ease", padding: "0 2px", whiteSpace: "nowrap",
+                  transition: "color 0.2s ease",
+                  padding: "0 2px",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {item.label}
-                <ChevronDown size={11} strokeWidth={1.5} style={{ transform: activeMega === item.label ? "rotate(180deg)" : "none", transition: "transform 0.3s ease" }} />
+                <ChevronDown
+                  size={11}
+                  strokeWidth={1.5}
+                  style={{
+                    transform: activeMega === item.label ? "rotate(180deg)" : "none",
+                    transition: "transform 0.3s ease",
+                  }}
+                />
               </button>
             )
           )}
         </div>
 
         {/* Mega Menus */}
-        {NAV_ITEMS.filter(i => i.sub).map((item) => (
-          <MegaMenu key={item.label} item={item} isOpen={activeMega === item.label} onEnter={handleMegaEnter} onLeave={handleMegaLeave} />
+        {NAV_ITEMS.filter((i) => i.sub).map((item) => (
+          <MegaMenu
+            key={item.label}
+            item={item}
+            isOpen={activeMega === item.label}
+            onEnter={handleMegaEnter}
+            onLeave={handleMegaLeave}
+          />
         ))}
       </header>
 
