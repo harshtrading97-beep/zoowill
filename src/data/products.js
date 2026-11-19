@@ -14,6 +14,7 @@ import riderApparelImg from "../assets/rider-&-apparel.png";
 import zoowilgroominganimalbrushImg from "../assets/zoowil-grooming-animal-brush.png";
 import zoowilblackridingbreechesImg from "../assets/zoowil-black-riding_breeches.png";
 import zoowilblackhorsehoofbootsImg from "../assets/zoowil-black-horse-hoof-boots.png";
+import zoowilhorseandcowmetalbrushImg from "../assets/zoowil-horse-cow-metal-grooming-brush.png";
 
 export const FALLBACK_IMG =
   "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1000&q=80";
@@ -226,7 +227,7 @@ export const products = [
       "Black",
       "Brown"
     ],
-    "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=85",
+    "image": zoowilhorseandcowmetalbrushImg,
     "specs": [
       "Durable natural bristles & hardwood base",
       "Comfortable ergonomic hand grip",
