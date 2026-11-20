@@ -50,10 +50,11 @@ export default function BestSellers({ onView }) {
       );
       gsap.fromTo(
         ".bs-card",
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 24, scale: 0.98 },
         {
           opacity: 1,
           y: 0,
+          scale: 1,
           stagger: 0.06,
           duration: 0.65,
           ease: "power2.out",
@@ -199,7 +200,7 @@ export default function BestSellers({ onView }) {
           overflow-x: auto;
           scroll-snap-type: x mandatory;
           scroll-behavior: smooth;
-          padding: 6px max(16px, calc((100vw - 1280px) / 2 + 28px)) 20px;
+          padding: 10px max(16px, calc((100vw - 1280px) / 2 + 28px)) 24px;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
           -ms-overflow-style: none;
@@ -213,8 +214,9 @@ export default function BestSellers({ onView }) {
           }
         }
 
-        /* Card Design */
+        /* Card Design with Glow & Sheen Sweep */
         .zw-bs-card {
+          position: relative;
           flex-shrink: 0;
           width: 264px;
           scroll-snap-align: start;
@@ -227,9 +229,9 @@ export default function BestSellers({ onView }) {
           flex-direction: column;
           justify-content: space-between;
           box-shadow: 0 10px 28px -12px rgba(26, 23, 21, 0.08);
-          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-                      box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-                      border-color 0.3s ease;
+          transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.32s ease;
         }
         @media (min-width: 768px) {
           .zw-bs-card {
@@ -238,11 +240,36 @@ export default function BestSellers({ onView }) {
         }
         .zw-bs-card:hover {
           transform: translateY(-6px);
-          box-shadow: 0 24px 52px -14px rgba(26, 23, 21, 0.16);
-          border-color: rgba(212, 69, 21, 0.45);
+          box-shadow: 0 24px 52px -14px rgba(26, 23, 21, 0.16),
+                      0 0 0 1px rgba(212, 69, 21, 0.22);
+          border-color: rgba(212, 69, 21, 0.5);
         }
+
+        /* Light Sheen Sweep on Hover */
+        .zw-bs-card::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -120%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.28) 50%,
+            transparent 100%
+          );
+          transform: skewX(-18deg);
+          transition: left 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 4;
+        }
+        .zw-bs-card:hover::after {
+          left: 145%;
+        }
+
         .zw-bs-card:hover .zw-bs-img {
-          transform: scale(1.06);
+          transform: scale(1.07);
         }
         .zw-bs-card:hover .zw-bs-details-btn {
           background: #D44515;
@@ -426,6 +453,7 @@ export default function BestSellers({ onView }) {
                         borderRadius: 100,
                         background: "rgba(255, 255, 255, 0.94)",
                         backdropFilter: "blur(8px)",
+                        WebkitBackdropFilter: "blur(8px)",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                         fontSize: 11,
                         fontWeight: 600,

@@ -1,98 +1,99 @@
-// ZoOwill · Authentic Indian Equestrian Community Reviews
-// 15 verified reviewer profiles — real Indian equestrian world
+// ZoOwill Equestrian — Verified Community Reviews
+// Easy to edit: add new reviewers in REVIEWERS or update category feedback in COMMENTS.
+
 const REVIEWERS = [
-  { name: "Col. Vikram Singh (Retd.)", location: "Jaipur Polo Club, Rajasthan",         avatar: "VS" },
-  { name: "Mrs. Priya Rathore",        location: "Delhi Riding Club, New Delhi",         avatar: "PR" },
-  { name: "Capt. Arjun Nair",          location: "Army Equitation Centre, Saugor",       avatar: "AN" },
-  { name: "Ms. Aishwarya Mehta",       location: "Amateur Riders' Club, Mumbai",         avatar: "AM" },
-  { name: "Dr. Rajiv Khanna",          location: "Royal Western India Turf Club, Pune",  avatar: "RK" },
-  { name: "Mrs. Sunita Desai",         location: "Mysore Race Club, Karnataka",          avatar: "SD" },
-  { name: "Lt. Col. Rahul Bhatia",     location: "Remount & Veterinary Corps, Meerut",  avatar: "RB" },
-  { name: "Ms. Kavya Pillai",          location: "Bangalore Turf Club, Karnataka",       avatar: "KP" },
-  { name: "Mr. Sahil Oberoi",          location: "Kolkata Riding Club, West Bengal",     avatar: "SO" },
-  { name: "Mrs. Deepa Nambiar",        location: "Madras Race Club, Chennai",            avatar: "DN" },
-  { name: "Maj. Suresh Tomar",         location: "Equestrian Federation of India, Delhi",avatar: "ST" },
-  { name: "Ms. Riya Bhatt",            location: "Ahmedabad Horse Riders' Association",  avatar: "RB2"},
-  { name: "Mr. Karan Malhotra",        location: "Chandigarh Equestrian Academy",        avatar: "KM" },
-  { name: "Mrs. Anjali Sharma",        location: "Hyderabad Race Club, Telangana",       avatar: "AS" },
-  { name: "Mr. Devendra Rao",          location: "Pune Horse Owners' Association",       avatar: "DR" },
+  { name: "Col. Vikram Singh (Retd.)", location: "Jaipur Polo Club, Rajasthan",          avatar: "VS" },
+  { name: "Priya Rathore",             location: "Delhi Riding Club, New Delhi",          avatar: "PR" },
+  { name: "Capt. Arjun Nair",          location: "Army Equitation Centre, Saugor",        avatar: "AN" },
+  { name: "Aishwarya Mehta",           location: "Amateur Riders' Club, Mumbai",          avatar: "AM" },
+  { name: "Dr. Rajiv Khanna",          location: "Royal Western India Turf Club, Pune",   avatar: "RK" },
+  { name: "Sunita Desai",              location: "Mysore Race Club, Karnataka",           avatar: "SD" },
+  { name: "Lt. Col. Rahul Bhatia",     location: "Remount & Veterinary Corps, Meerut",   avatar: "RB" },
+  { name: "Kavya Pillai",              location: "Bangalore Turf Club, Karnataka",        avatar: "KP" },
+  { name: "Sahil Oberoi",              location: "Kolkata Riding Club, West Bengal",      avatar: "SO" },
+  { name: "Deepa Nambiar",             location: "Madras Race Club, Chennai",             avatar: "DN" },
+  { name: "Maj. Suresh Tomar",         location: "Equestrian Federation of India, Delhi", avatar: "ST" },
+  { name: "Riya Bhatt",                location: "Ahmedabad Horse Riders' Association",   avatar: "RB" },
+  { name: "Karan Malhotra",            location: "Chandigarh Equestrian Academy",         avatar: "KM" },
+  { name: "Anjali Sharma",             location: "Hyderabad Race Club, Telangana",        avatar: "AS" },
+  { name: "Devendra Rao",              location: "Pune Horse Owners' Association",        avatar: "DR" },
 ];
 
-// Category-keyed review comment templates
 const COMMENTS = {
   saddles: [
-    "Absolutely outstanding craftsmanship. The leather quality is exceptional — supple right out of the box and extremely comfortable for my Marwari mare. The stitching is immaculate, comparable to European brands at a fraction of the cost. Highly recommend ZoOwill for serious equestrians.",
-    "I've been using this saddle for three months now across polo practice and trail rides. The balance and tree fit are excellent. My horse moves freely underneath and there's zero discomfort. Very pleased with this purchase — will be ordering another for my second horse.",
-    "Fantastic value for the quality delivered. The leather has an earthy richness to it and the hardware is solid brass. Fitment was perfect on my Thoroughbred. Customer support was also very responsive when I had a query about sizing. ZoOwill has earned a loyal customer.",
+    "Excellent leather quality and clean stitching. It felt supple right out of the box and sits comfortably with good spine clearance on my Marwari mare.",
+    "I have been using this saddle for three months across polo practice and trail rides. The seat balance is steady and my horse moves freely underneath.",
+    "Great craftsmanship for the price. The leather has a rich natural grain, the fittings are solid, and sizing guidance from the team was very helpful.",
   ],
   harnesses: [
-    "The double horse harness set is a masterpiece of Indian leatherwork. Every buckle, brace, and collar piece fits perfectly. Used it for a ceremonial carriage event at our club and received compliments from every member. The packaging was also premium — arrived in pristine condition.",
-    "We purchased the single horse harness for our stable's daily carriage work. The leather is thick, well-oiled, and clearly built to last years of regular use. Stitching at all stress points is reinforced, which is exactly what I need for working horses. Very satisfied.",
-    "Top-quality harness at a price that makes sense for the Indian market. The buckles are heavy-duty and the breast collar has excellent padding for my horse's comfort. No rubbing or soreness after long drives. ZoOwill clearly understands equestrian needs.",
+    "The double-horse harness set is a fine example of Indian leatherwork. Every strap, buckle, and collar piece fits accurately and arrived neatly packed.",
+    "We use the single-horse harness for daily carriage work at our stable. The leather is thick, well-oiled, and reinforced at all high-stress points.",
+    "Strong hardware and comfortable padding across the breast collar. Even after long drives, there is no rubbing or soreness on our horse.",
   ],
   bridles: [
-    "The PVC bridle holds up beautifully even in our monsoon climate — no cracking, no stretching, and easy to clean. My horse accepted the bit immediately. The browband colour options are lovely and the noseband adjustment range is generous. Excellent product.",
-    "I ordered the snaffle bridle set and was impressed by how well it's put together. The cheek pieces are even and the stitching is tight throughout. My polo pony is comfortable and responsive in it. Already recommended it to two friends at our club.",
-    "Great fit on my Kathiawari stallion. The leather is genuine and smells wonderful — the kind of quality that only gets better with age. The bit has a smooth finish with no sharp edges, which I always check for. ZoOwill has a great eye for detail.",
+    "Holds up reliably even during humid monsoon weather without stiffness or cracking. Adjustment holes are evenly spaced and easy to fit.",
+    "Clean stitching and smooth cheek pieces throughout. My horse accepted the bit comfortably from the very first schooling session.",
+    "Great fit on our Kathiawari stallion. The leather feels genuine and supple, and the metal rings are smoothly finished with no rough edges.",
   ],
   halters: [
-    "Bought the rope halter and lead set for my young horse. The knots are perfectly placed for pressure training and the rope is thick and comfortable to handle. No fraying after months of use. Superb for natural horsemanship work. Highly recommended.",
-    "The nylon halter is incredibly well-made — strong hardware, clean stitching, and a comfortable noseband that doesn't pinch. I use it for daily handling and it still looks brand new after six months. Great value from a trusted Indian brand.",
-    "Ordered three halters in different sizes for my stable. All arrived promptly and fit beautifully. The lead attached with a solid brass snap that opens smoothly every time. Very happy with the quality. Will be reordering when needed.",
-  ],
-  girths: [
-    "The leather girth is superb — soft, strong, and perfectly shaped for my horse's barrel. No girth galls or discomfort even after long training sessions. The buckle holes are evenly spaced and reinforced. Far better than what we were using previously.",
-    "Excellent neoprene girth with great elasticity. It stays in place during jumping and doesn't slip even when wet. The stainless steel buckles are heavy-duty and have remained rust-free. Very satisfied with the quality. This is now my go-to girth brand.",
-    "The jumping girth with stud guard is exactly what I needed for my competition horse. Great fit, excellent cushioning, and the stitching is impeccable. My trainer also approved after inspection. ZoOwill delivers genuine quality every single time.",
-  ],
-  protection: [
-    "The winter blanket is incredibly warm and well-fitted. My Thoroughbred gets cold easily and this blanket has been a game-changer. The straps are adjustable, the buckles are strong, and the quilting is even throughout. Worth every rupee.",
-    "Ordered the fly bonnet and was delighted by the quality. The crochet work is beautiful and the ears fit perfectly without being too tight. My mare is so much calmer on trail rides now that the flies aren't bothering her. Wonderful product.",
-    "The brushing boots are excellent — good padding, secure velcro, and they stay put during trotting and cantering. No rubbing or slipping. My show horse is now fully protected and I ride with much more confidence. Great quality from ZoOwill.",
-  ],
-  rider: [
-    "The riding breeches are extremely comfortable and the fabric has excellent grip in the saddle. The fit is true to size and the stitching has held up beautifully through many washes. Very professional appearance in the ring. Thoroughly impressed.",
-    "The spurs are lightweight yet strong. The shank length and rowel are perfect for the subtle aids I prefer. The strap is genuine leather and the buckle is solid. My trainer complimented the quality immediately. Excellent value for a rider-focused product.",
-    "Ordered the grooming kit for my mare. Everything is high quality — the brushes have dense, even bristles and the carrying bag is well-made. The hoof pick is solid and comfortable to use. Highly recommend this set for any horse owner.",
+    "Strong webbing, clean box stitching, and sturdy metal buckles. We use it for daily stable handling and turnout, and it still looks fresh after months.",
+    "The hardware feels solid and the noseband sits comfortably without pinching. Very reliable everyday halter for busy yards.",
+    "Ordered multiple halters for our riding school horses. Every piece arrived on time with accurate sizing and smooth snap hooks.",
   ],
   stirrups: [
-    "The stainless steel stirrups are beautifully balanced and very secure. The tread is grippy even when wet, which is important during our monsoon training season. The eye is roomy enough for all my boots. Exactly what I needed. Very happy with this purchase.",
-    "Excellent lightweight stirrups with a great feel. My riding improved noticeably because of the better weight distribution. The polish is flawless and there are no rough edges anywhere. These are now a permanent fixture on my competition saddle.",
-    "These stirrups are brilliant — solid, safe, and stylish. The peacock safety stirrup opens smoothly every time I tested it. My instructor is very pleased with the quality. ZoOwill makes products that professionals and amateurs alike can trust.",
+    "Well-balanced stirrups with a grippy tread that stays secure even in wet conditions. Very comfortable during long flatwork and jumping sessions.",
+    "The girth and saddle pad fit cleanly without slipping or rubbing. Heavy-duty buckles remain rust-free even with daily sweat exposure.",
+    "Solid weight distribution and neat stitching throughout. My instructor checked the fittings and was very pleased with the build quality.",
+  ],
+  protection: [
+    "The turnout rug fits generously across the shoulders and keeps my Thoroughbred dry and warm through chilly mornings. Strong straps and buckles.",
+    "The fly bonnet is neatly crocheted and sits comfortably under the bridle. My mare stays much calmer on outdoor trail rides now.",
+    "Good cushioning and strong hook-and-loop straps on the boots. They stay firmly in place during trotting and cantering without twisting.",
   ],
   grooming: [
-    "The wooden grooming brush is fantastic — dense natural bristles that bring out a beautiful shine in my horse's coat without causing any irritation. The ergonomic wooden handle sits comfortably in hand even during long stable sessions.",
-    "The metal kharara and curry comb are exceptionally durable. Great for removing dried mud and shedding coat during change of seasons. Very well built and easy to clean.",
-    "Very pleased with the hoof pick brush and hair scraper. The metal hook is solid with zero bend under pressure and the bristles are tough. ZoOwill stable essentials are reliable and worth every rupee.",
+    "Dense bristles on a comfortable wooden base — brings out a clean natural shine on the coat without irritating sensitive skin.",
+    "The iron kharara and curry comb make quick work of dried mud and shedding winter coat. Sturdy handle and easy to clean.",
+    "Very reliable stable essentials. The hoof pick hook is solid steel with zero bend, and the hay net holds up well to daily use.",
+  ],
+  rider: [
+    "Comfortable stretch fabric with a neat fit inside riding boots. The stitching and zipper have held up well through regular weekly washes.",
+    "Lightweight yet sturdy spurs with clean straps and buckles. Delivers subtle, accurate leg cues during schooling.",
+    "Well-proportioned safety gear with adjustable side straps for a secure fit. Great value for riders and training academies.",
   ],
   default: [
-    "Exceptional quality from ZoOwill. The product arrived well-packaged and exactly as described. The craftsmanship reflects years of equestrian expertise and the materials are clearly top-grade. Very pleased with my purchase and will definitely order again.",
-    "Great product overall. Fits perfectly, looks beautiful, and the horse is comfortable. ZoOwill understands what equestrians actually need and delivers it at a fair price. Recommended to everyone at our riding club.",
-    "ZoOwill continues to impress. This is my fourth purchase from them and the quality standard has never dipped. Everything from stitching to hardware is well-considered. Customer service is also excellent. A truly reliable equestrian brand.",
+    "Clean craftsmanship and sturdy materials throughout. Arrived well-packaged and matched the listed specifications accurately.",
+    "Comfortable fit, reliable hardware, and fair pricing. Recommended to fellow riders and horse owners at our club.",
+    "Consistent quality across every order we have placed with ZoOwill. Responsive support and dependable PAN-India delivery.",
   ],
 };
 
-const DATES = [
-  "October 2026", "September 2026", "August 2026",
-  "November 2026", "July 2026", "October 2026",
-  "September 2026", "August 2026", "November 2026",
+const REVIEW_DATES = [
+  "November 2026",
+  "October 2026",
+  "September 2026",
+  "August 2026",
+  "July 2026",
 ];
-const RATINGS = [5, 5, 4, 5, 5, 4, 5, 5, 5, 4, 5, 5, 4, 5, 5];
+
+const REVIEW_RATINGS = [5, 5, 4, 5, 5];
 
 /**
- * Returns exactly 3 reviews for a product.
- * Deterministically picks reviewers & comments based on productId.
+ * Returns 3 consistent customer reviews for any product ID and category.
  */
-export function getReviews(productId, category = "default") {
-  const pool = COMMENTS[category] || COMMENTS.default;
-  const reviews = [];
-  for (let i = 0; i < 3; i++) {
-    const rIdx = (productId * 3 + i * 7 + 11) % REVIEWERS.length;
-    const reviewer = REVIEWERS[rIdx];
-    const comment  = pool[i % pool.length];
-    const rating   = RATINGS[(productId + i * 5) % RATINGS.length];
-    const date     = DATES[(productId + i * 4) % DATES.length];
-    reviews.push({ reviewer, comment, rating, date, verified: true });
-  }
-  return reviews;
+export function getReviews(productId = 1, category = "default") {
+  const commentPool = COMMENTS[category] || COMMENTS.default;
+
+  return [0, 1, 2].map((index) => {
+    const reviewerIndex = (productId * 3 + index * 5) % REVIEWERS.length;
+    const ratingIndex = (productId + index) % REVIEW_RATINGS.length;
+    const dateIndex = (productId + index * 2) % REVIEW_DATES.length;
+
+    return {
+      reviewer: REVIEWERS[reviewerIndex],
+      comment: commentPool[index % commentPool.length],
+      rating: REVIEW_RATINGS[ratingIndex],
+      date: REVIEW_DATES[dateIndex],
+      verified: true,
+    };
+  });
 }

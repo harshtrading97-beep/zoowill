@@ -50,10 +50,11 @@ export default function Collections() {
 
       gsap.fromTo(
         ".coll-card",
-        { opacity: 0, y: 36 },
+        { opacity: 0, y: 36, scale: 0.98 },
         {
           opacity: 1,
           y: 0,
+          scale: 1,
           stagger: 0.16,
           duration: 0.9,
           ease: "power3.out",
@@ -122,9 +123,9 @@ export default function Collections() {
           padding: 18px;
           border: 1px solid rgba(231, 174, 175, 0.35);
           box-shadow: 0 22px 55px -20px rgba(26, 23, 21, 0.25);
-          transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-                      box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-                      border-color 0.3s ease;
+          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.35s ease;
         }
         @media (min-width: 768px) {
           .zw-coll-card {
@@ -133,17 +134,70 @@ export default function Collections() {
             padding: 26px;
           }
         }
+
+        /* Enhanced Terracotta + Warm Sunlit Rim Glow */
         .zw-coll-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 30px 70px -18px rgba(26, 23, 21, 0.34);
-          border-color: rgba(212, 69, 21, 0.45);
+          transform: translateY(-7px);
+          box-shadow: 0 34px 76px -18px rgba(26, 23, 21, 0.38),
+                      0 14px 38px -10px rgba(212, 69, 21, 0.32),
+                      0 0 0 1.5px rgba(212, 69, 21, 0.55);
+          border-color: rgba(212, 69, 21, 0.75);
         }
+
+        /* Warm Radial Sun-Glow Overlay on Hover */
+        .zw-coll-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            circle at 80% 18%,
+            rgba(255, 224, 198, 0.28) 0%,
+            rgba(212, 69, 21, 0.14) 38%,
+            transparent 70%
+          );
+          opacity: 0;
+          transition: opacity 0.45s ease;
+          pointer-events: none;
+          z-index: 3;
+        }
+        .zw-coll-card:hover::before {
+          opacity: 1;
+        }
+
+        /* Crisp Light Sheen Sweep across Card */
+        .zw-coll-card::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 70%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.34) 50%,
+            transparent 100%
+          );
+          transform: skewX(-18deg);
+          transition: left 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 5;
+        }
+        .zw-coll-card:hover::after {
+          left: 150%;
+        }
+
         .zw-coll-card:hover .zw-coll-bg-img {
-          transform: scale(1.06);
+          transform: scale(1.07);
+          filter: brightness(1.05);
         }
         .zw-coll-card:hover .zw-coll-cta-btn {
           background: #D44515;
           color: #FFFFFF;
+          box-shadow: 0 10px 26px -6px rgba(212, 69, 21, 0.55);
+        }
+        .zw-coll-card:hover .zw-coll-cta-icon {
+          transform: translate(2px, -2px);
         }
 
         .zw-coll-top-bar {
@@ -165,6 +219,12 @@ export default function Collections() {
           border: 1px solid rgba(255, 255, 255, 0.18);
           border-radius: 18px;
           padding: 18px;
+          transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+        }
+        .zw-coll-card:hover .zw-coll-glass {
+          border-color: rgba(243, 182, 162, 0.45);
+          background: rgba(24, 21, 19, 0.7);
+          box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.35);
         }
         @media (min-width: 768px) {
           .zw-coll-glass {
@@ -269,7 +329,7 @@ export default function Collections() {
                     height: "100%",
                     objectFit: "cover",
                     display: "block",
-                    transition: "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)",
+                    transition: "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease",
                   }}
                 />
 
@@ -334,7 +394,13 @@ export default function Collections() {
                     onClick={(e) => jumpToCollection(e, coll.category)}
                     className="zw-coll-cta-btn"
                   >
-                    {coll.cta} <ArrowUpRight size={14} strokeWidth={1.8} />
+                    <span>{coll.cta}</span>
+                    <ArrowUpRight
+                      size={14}
+                      strokeWidth={1.8}
+                      className="zw-coll-cta-icon"
+                      style={{ transition: "transform 0.25s ease" }}
+                    />
                   </a>
                 </div>
               </div>
