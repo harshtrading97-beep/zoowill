@@ -54,7 +54,7 @@ export default function CategoryShowcase() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
     try {
       sessionStorage.setItem("zw_cat", catId);
-    } catch (_) { /* noop */ }
+    } catch (_) {}
     window.dispatchEvent(new CustomEvent("zw:filterCategory", { detail: catId }));
   };
 
@@ -63,7 +63,8 @@ export default function CategoryShowcase() {
       <style>{`
         .zw-cat-sec {
           padding: 64px 14px 72px;
-          background: linear-gradient(180deg, #FAF8F5 0%, #F6F1EB 100%);
+          background: linear-gradient(180deg, #FAF8F5 0%, #F5F0E9 100%);
+          border-top: 1px solid rgba(231, 174, 175, 0.3);
           width: 100%;
           overflow-x: clip;
         }
@@ -74,7 +75,7 @@ export default function CategoryShowcase() {
         }
         @media (min-width: 1024px) {
           .zw-cat-sec {
-            padding: 108px 28px 112px;
+            padding: 108px 28px 116px;
           }
         }
 
@@ -108,8 +109,8 @@ export default function CategoryShowcase() {
           border-radius: 20px;
           overflow: hidden;
           background: #FFFFFF;
-          border: 1px solid rgba(231, 174, 175, 0.42);
-          box-shadow: 0 10px 28px -12px rgba(26, 23, 21, 0.08);
+          border: 1px solid rgba(231, 174, 175, 0.45);
+          box-shadow: 0 12px 30px -12px rgba(26, 23, 21, 0.08);
           cursor: pointer;
           transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
                       box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1),
@@ -117,27 +118,48 @@ export default function CategoryShowcase() {
         }
         @media (min-width: 768px) {
           .zw-cat-card {
-            border-radius: 22px;
+            border-radius: 24px;
           }
         }
 
         .zw-cat-card:hover {
           transform: translateY(-6px);
-          box-shadow: 0 24px 52px -14px rgba(26, 23, 21, 0.16);
-          border-color: rgba(212, 69, 21, 0.45);
+          box-shadow: 0 26px 56px -14px rgba(26, 23, 21, 0.16),
+                      0 10px 26px -10px rgba(212, 69, 21, 0.24),
+                      0 0 0 1px rgba(212, 69, 21, 0.42);
+          border-color: rgba(212, 69, 21, 0.65);
+        }
+
+        .zw-cat-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            circle at 80% 18%,
+            rgba(255, 224, 198, 0.24) 0%,
+            rgba(212, 69, 21, 0.1) 42%,
+            transparent 72%
+          );
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          pointer-events: none;
+          z-index: 3;
+        }
+        .zw-cat-card:hover::before {
+          opacity: 1;
         }
 
         .zw-cat-card::after {
           content: "";
           position: absolute;
           top: 0;
-          left: -120%;
+          left: -125%;
           width: 65%;
           height: 100%;
           background: linear-gradient(
             105deg,
             transparent 0%,
-            rgba(255, 255, 255, 0.24) 50%,
+            rgba(255, 255, 255, 0.34) 50%,
             transparent 100%
           );
           transform: skewX(-18deg);
@@ -157,7 +179,7 @@ export default function CategoryShowcase() {
         }
         @media (min-width: 768px) {
           .zw-cat-media {
-            aspect-ratio: 4 / 3.4;
+            aspect-ratio: 4 / 3.45;
           }
         }
 
@@ -166,10 +188,35 @@ export default function CategoryShowcase() {
           height: 100%;
           object-fit: cover;
           display: block;
-          transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+          transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                      filter 0.45s ease;
         }
         .zw-cat-card:hover .zw-cat-img {
           transform: scale(1.07);
+          filter: brightness(1.04);
+        }
+
+        .zw-cat-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          background: rgba(20, 17, 15, 0.48);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.24);
+          border-radius: 100px;
+          padding: 3px 9px;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 9px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.94);
+          transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .zw-cat-card:hover .zw-cat-pill {
+          background: #D44515;
+          border-color: rgba(255, 224, 198, 0.55);
         }
 
         .zw-cat-body {
@@ -180,6 +227,7 @@ export default function CategoryShowcase() {
           gap: 8px;
           flex: 1;
           background: #FFFFFF;
+          border-top: 1px solid rgba(231, 174, 175, 0.22);
         }
         @media (min-width: 768px) {
           .zw-cat-body {
@@ -206,10 +254,10 @@ export default function CategoryShowcase() {
         }
 
         .zw-cat-arrow {
-          width: 28px;
-          height: 28px;
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
-          border: 1px solid rgba(231, 174, 175, 0.6);
+          border: 1px solid rgba(231, 174, 175, 0.65);
           background: #FAF8F5;
           color: #1A1715;
           display: inline-flex;
@@ -228,6 +276,112 @@ export default function CategoryShowcase() {
           background: #D44515;
           border-color: #D44515;
           color: #FFFFFF;
+          transform: rotate(45deg);
+          box-shadow: 0 6px 16px -4px rgba(212, 69, 21, 0.48);
+        }
+
+        /* ── Bespoke Luxury Bottom CTA Pill ── */
+        .zw-cat-footer-cta-wrap {
+          margin-top: clamp(32px, 5vw, 48px);
+          display: flex;
+          justify-content: center;
+        }
+
+        .zw-cat-all-btn {
+          position: relative;
+          overflow: hidden;
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 14px;
+          width: 100%;
+          max-width: 320px;
+          min-height: 48px;
+          padding: 6px 6px 6px 22px;
+          background: #1A1715;
+          border: 1px solid rgba(231, 174, 175, 0.38);
+          color: #FAF8F5;
+          border-radius: 100px;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.13em;
+          text-transform: uppercase;
+          text-decoration: none;
+          box-shadow: 0 12px 28px -8px rgba(26, 23, 21, 0.32),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.32s ease;
+        }
+        @media (min-width: 480px) {
+          .zw-cat-all-btn {
+            width: auto;
+            max-width: none;
+            justify-content: center;
+            padding: 6px 6px 6px 24px;
+          }
+        }
+
+        .zw-cat-all-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, #D44515 0%, #B8370C 100%);
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 0;
+        }
+        .zw-cat-all-btn::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.32) 50%,
+            transparent 100%
+          );
+          transform: skewX(-20deg);
+          transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 1;
+        }
+        .zw-cat-all-btn:hover {
+          transform: translateY(-2px);
+          border-color: rgba(243, 182, 162, 0.65);
+          box-shadow: 0 16px 34px -6px rgba(212, 69, 21, 0.48);
+        }
+        .zw-cat-all-btn:hover::before {
+          transform: scaleX(1);
+        }
+        .zw-cat-all-btn:hover::after {
+          left: 150%;
+        }
+
+        .zw-cat-all-badge {
+          position: relative;
+          z-index: 2;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          color: #FAF8F5;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-cat-all-btn:hover .zw-cat-all-badge {
+          background: #FFFFFF;
+          border-color: #FFFFFF;
+          color: #D44515;
           transform: rotate(45deg);
         }
       `}</style>
@@ -305,7 +459,7 @@ export default function CategoryShowcase() {
                     position: "absolute",
                     inset: 0,
                     background:
-                      "linear-gradient(180deg, rgba(26,23,21,0.22) 0%, rgba(26,23,21,0.05) 45%, rgba(26,23,21,0.74) 100%)",
+                      "linear-gradient(180deg, rgba(22,19,17,0.28) 0%, rgba(22,19,17,0.06) 44%, rgba(22,19,17,0.78) 100%)",
                     pointerEvents: "none",
                   }}
                 />
@@ -327,32 +481,16 @@ export default function CategoryShowcase() {
                     style={{
                       fontFamily: "'Cormorant Garamond', serif",
                       fontStyle: "italic",
-                      fontSize: 13.5,
+                      fontSize: 14,
                       fontWeight: 600,
-                      color: "rgba(255, 255, 255, 0.92)",
+                      color: "rgba(255, 255, 255, 0.94)",
                       textShadow: "0 1px 4px rgba(0,0,0,0.35)",
                     }}
                   >
                     {String(idx + 1).padStart(2, "0")}
                   </span>
 
-                  <span
-                    style={{
-                      background: "rgba(250, 248, 245, 0.92)",
-                      backdropFilter: "blur(8px)",
-                      WebkitBackdropFilter: "blur(8px)",
-                      border: "1px solid rgba(231, 174, 175, 0.45)",
-                      borderRadius: 100,
-                      padding: "3px 9px",
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      fontSize: 9.5,
-                      fontWeight: 600,
-                      letterSpacing: "0.05em",
-                      color: "#1A1715",
-                    }}
-                  >
-                    {cat.count} {cat.count === 1 ? "Item" : "Items"}
-                  </span>
+                  <span className="zw-cat-pill">Explore</span>
                 </div>
 
                 <h3
@@ -377,11 +515,26 @@ export default function CategoryShowcase() {
               <div className="zw-cat-body">
                 <p className="zw-cat-desc">{cat.description}</p>
                 <span className="zw-cat-arrow" aria-hidden="true">
-                  <ArrowUpRight size={14} strokeWidth={1.7} />
+                  <ArrowUpRight size={14} strokeWidth={1.8} />
                 </span>
               </div>
             </a>
           ))}
+        </div>
+
+        <div className="zw-cat-footer-cta-wrap">
+          <a
+            href="#featured"
+            onClick={(e) => handleCategoryClick(e, "all")}
+            className="zw-cat-all-btn"
+          >
+            <span style={{ position: "relative", zIndex: 2 }}>
+              View Complete Catalogue
+            </span>
+            <span className="zw-cat-all-badge" aria-hidden="true">
+              <ArrowUpRight size={15} strokeWidth={2.1} />
+            </span>
+          </a>
         </div>
       </section>
     </>

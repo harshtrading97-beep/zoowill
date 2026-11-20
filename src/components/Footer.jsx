@@ -1,11 +1,17 @@
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Mail,
   MessageCircle,
   Globe,
-  ArrowRight,
+  ArrowUpRight,
   ArrowUp,
   MapPin,
+  Phone,
 } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FOOTER_COLS = [
   {
@@ -45,7 +51,7 @@ const FOOTER_COLS = [
     heading: "Company",
     links: [
       { label: "About ZoOwill", href: "#about" },
-      { label: "Full 113 Catalogue", href: "#featured", cat: "all" },
+      { label: "Complete Catalogue", href: "#featured", cat: "all" },
       { label: "Customer Favourites", href: "#bestsellers" },
       {
         label: "Wholesale Enquiries",
@@ -61,13 +67,42 @@ const FOOTER_COLS = [
   },
 ];
 
+const WHATSAPP_BULK_URL =
+  "https://wa.me/916394549702?text=Hello%20ZoOwill%20Equestrian%2C%20I%20have%20a%20wholesale%20and%20bulk%20enquiry%20regarding%20your%20catalogue.";
+
 export default function Footer() {
+  const footerRef = useRef(null);
+  const ctaRef    = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (ctaRef.current) {
+        gsap.fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 26 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: { trigger: ctaRef.current, start: "top 88%" },
+          }
+        );
+      }
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const handleLinkClick = (e, link) => {
     if (link.external) return;
     if (link.cat) {
       e.preventDefault();
       const el = document.getElementById("featured");
       if (el) el.scrollIntoView({ behavior: "smooth" });
+      try {
+        sessionStorage.setItem("zw_cat", link.cat);
+      } catch (_) { /* noop */ }
       window.dispatchEvent(
         new CustomEvent("zw:filterCategory", { detail: link.cat })
       );
@@ -84,37 +119,84 @@ export default function Footer() {
         .zw-footer-wrap {
           max-width: 1280px;
           margin: 0 auto;
-          padding: 40px 16px 24px;
+          padding: 44px 14px 24px;
           position: relative;
           z-index: 2;
         }
+        @media (min-width: 640px) {
+          .zw-footer-wrap {
+            padding: 60px 22px 26px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .zw-footer-wrap {
+            padding: 76px 28px 30px;
+          }
+        }
+
+        /* ── Wholesale CTA Card with Hover Glow & Sheen ── */
         .zw-footer-cta-card {
+          position: relative;
+          overflow: hidden;
           background: linear-gradient(145deg, #FAF8F5 0%, #FFFFFF 100%);
           border: 1px solid rgba(231, 174, 175, 0.55);
           border-radius: 22px;
-          padding: 24px 20px;
+          padding: 24px 18px;
           display: flex;
           flex-direction: column;
           gap: 22px;
           box-shadow: 0 20px 50px -20px rgba(26, 23, 21, 0.1);
-          margin-bottom: 40px;
+          margin-bottom: 42px;
+          transition: border-color 0.35s ease, box-shadow 0.4s ease;
         }
+        .zw-footer-cta-card:hover {
+          border-color: rgba(212, 69, 21, 0.45);
+          box-shadow: 0 26px 60px -18px rgba(26, 23, 21, 0.15),
+                      0 10px 28px -10px rgba(212, 69, 21, 0.16);
+        }
+        .zw-footer-cta-card::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 60%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.45) 50%,
+            transparent 100%
+          );
+          transform: skewX(-18deg);
+          transition: left 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+        }
+        .zw-footer-cta-card:hover::after {
+          left: 150%;
+        }
+
         .zw-footer-cta-actions {
           display: flex;
           flex-direction: column;
           gap: 10px;
           width: 100%;
         }
-        .zw-footer-btn-primary,
-        .zw-footer-btn-secondary {
+
+        /* ── Bespoke Luxury Primary Button ── */
+        .zw-footer-btn-primary {
+          position: relative;
+          overflow: hidden;
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          gap: 9px;
+          justify-content: space-between;
+          gap: 12px;
           width: 100%;
-          min-height: 46px;
-          padding: 13px 22px;
+          min-height: 48px;
+          padding: 6px 6px 6px 20px;
           border-radius: 100px;
+          background: #1A1715;
+          border: 1px solid rgba(231, 174, 175, 0.38);
+          color: #FAF8F5;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 11px;
           font-weight: 600;
@@ -122,28 +204,145 @@ export default function Footer() {
           text-transform: uppercase;
           text-decoration: none;
           box-sizing: border-box;
-          transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+          box-shadow: 0 10px 24px -6px rgba(26, 23, 21, 0.3),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.32s ease;
         }
-        .zw-footer-btn-primary {
-          background: #1A1715;
-          color: #FAF8F5;
-          box-shadow: 0 10px 24px -6px rgba(26, 23, 21, 0.3);
+        .zw-footer-btn-primary::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, #D44515 0%, #B8370C 100%);
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 0;
+        }
+        .zw-footer-btn-primary::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%
+          );
+          transform: skewX(-20deg);
+          transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 1;
         }
         .zw-footer-btn-primary:hover {
-          background: #D44515;
           transform: translateY(-2px);
+          border-color: rgba(243, 182, 162, 0.65);
+          box-shadow: 0 14px 30px -6px rgba(212, 69, 21, 0.45);
         }
-        .zw-footer-btn-secondary {
-          background: white;
-          border: 1px solid rgba(231, 174, 175, 0.8);
-          color: #1A1715;
+        .zw-footer-btn-primary:hover::before {
+          transform: scaleX(1);
         }
-        .zw-footer-btn-secondary:hover {
-          border-color: #1A1715;
-          background: #FAF8F5;
-          transform: translateY(-2px);
+        .zw-footer-btn-primary:hover::after {
+          left: 150%;
         }
 
+        .zw-footer-primary-badge {
+          position: relative;
+          z-index: 2;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          color: #FAF8F5;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-footer-btn-primary:hover .zw-footer-primary-badge {
+          background: #FFFFFF;
+          border-color: #FFFFFF;
+          color: #D44515;
+          transform: rotate(45deg);
+        }
+
+        /* ── Bespoke Luxury Secondary Button ── */
+        .zw-footer-btn-secondary {
+          position: relative;
+          overflow: hidden;
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          width: 100%;
+          min-height: 48px;
+          padding: 6px 6px 6px 20px;
+          border-radius: 100px;
+          background: #FFFFFF;
+          border: 1px solid rgba(231, 174, 175, 0.78);
+          color: #1A1715;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.13em;
+          text-transform: uppercase;
+          text-decoration: none;
+          box-sizing: border-box;
+          box-shadow: 0 6px 18px -6px rgba(26, 23, 21, 0.08);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      color 0.32s ease,
+                      border-color 0.32s ease,
+                      box-shadow 0.32s ease;
+        }
+        .zw-footer-btn-secondary::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: #1A1715;
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 0;
+        }
+        .zw-footer-btn-secondary:hover {
+          color: #FAF8F5;
+          border-color: #1A1715;
+          transform: translateY(-2px);
+          box-shadow: 0 12px 26px -6px rgba(26, 23, 21, 0.25);
+        }
+        .zw-footer-btn-secondary:hover::before {
+          transform: scaleX(1);
+        }
+
+        .zw-footer-secondary-badge {
+          position: relative;
+          z-index: 2;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: #FAF8F5;
+          border: 1px solid rgba(231, 174, 175, 0.65);
+          color: #D44515;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-footer-btn-secondary:hover .zw-footer-secondary-badge {
+          background: #D44515;
+          border-color: #D44515;
+          color: #FFFFFF;
+          transform: rotate(45deg);
+        }
+
+        /* ── Main Footer Columns ── */
         .zw-footer-main {
           display: grid;
           grid-template-columns: 1fr;
@@ -154,6 +353,34 @@ export default function Footer() {
           padding-bottom: 26px;
           border-bottom: 1px solid rgba(231, 174, 175, 0.38);
         }
+
+        .zw-footer-contact-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom: 18px;
+        }
+        .zw-footer-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 7px 12px;
+          border-radius: 100px;
+          background: #FFFFFF;
+          border: 1px solid rgba(231, 174, 175, 0.55);
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 11.5px;
+          font-weight: 500;
+          color: #4A433E;
+          text-decoration: none;
+          transition: all 0.25s ease;
+        }
+        .zw-footer-chip:hover {
+          border-color: #D44515;
+          color: #D44515;
+          transform: translateY(-1px);
+        }
+
         .zw-footer-links-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -162,7 +389,7 @@ export default function Footer() {
         .zw-footer-link {
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 12.5px;
-          line-height: 1.45;
+          line-height: 1.48;
           color: #6B625C;
           text-decoration: none;
           display: inline-block;
@@ -177,7 +404,7 @@ export default function Footer() {
           width: 40px;
           height: 40px;
           border-radius: 50%;
-          background: white;
+          background: #FFFFFF;
           border: 1px solid rgba(231, 174, 175, 0.6);
           display: inline-flex;
           align-items: center;
@@ -189,7 +416,7 @@ export default function Footer() {
         }
         .zw-social-btn:hover {
           background: #D44515;
-          color: white;
+          color: #FFFFFF;
           border-color: #D44515;
           transform: translateY(-2px);
         }
@@ -210,13 +437,35 @@ export default function Footer() {
           gap: 12px;
         }
 
+        .zw-back-top-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 7px 14px;
+          border-radius: 100px;
+          background: #FFFFFF;
+          border: 1px solid rgba(231, 174, 175, 0.65);
+          color: #1A1715;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 10.5px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          cursor: pointer;
+          flex-shrink: 0;
+          transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-back-top-btn:hover {
+          background: #1A1715;
+          border-color: #1A1715;
+          color: #FFFFFF;
+          transform: translateY(-2px);
+        }
+
         @media (min-width: 768px) {
-          .zw-footer-wrap {
-            padding: 68px 28px 28px;
-          }
           .zw-footer-cta-card {
             border-radius: 26px;
-            padding: 44px 48px;
+            padding: 40px 44px;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
@@ -225,7 +474,7 @@ export default function Footer() {
           }
           .zw-footer-cta-actions {
             width: auto;
-            min-width: 255px;
+            min-width: 265px;
             flex-shrink: 0;
           }
           .zw-footer-brand-box {
@@ -259,6 +508,7 @@ export default function Footer() {
 
       <footer
         id="contact"
+        ref={footerRef}
         style={{
           background: "linear-gradient(180deg, #F3EFEA 0%, #ECE6DE 100%)",
           borderTop: "1px solid rgba(231, 174, 175, 0.5)",
@@ -269,7 +519,7 @@ export default function Footer() {
       >
         <div className="zw-footer-wrap">
           {/* ── Wholesale & Catalogue Enquiries CTA Card ── */}
-          <div className="zw-footer-cta-card">
+          <div ref={ctaRef} className="zw-footer-cta-card">
             <div style={{ maxWidth: 640 }}>
               <span
                 style={{
@@ -323,19 +573,38 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Action Buttons */}
+            {/* Bespoke Luxury Action Buttons */}
             <div className="zw-footer-cta-actions">
               <a href="#featured" className="zw-footer-btn-primary">
-                Explore 113 Products <ArrowRight size={14} strokeWidth={1.8} />
+                <span style={{ position: "relative", zIndex: 2 }}>
+                  Explore the Catalogue
+                </span>
+                <span className="zw-footer-primary-badge" aria-hidden="true">
+                  <ArrowUpRight size={15} strokeWidth={2.1} />
+                </span>
               </a>
+
               <a
-                href="https://wa.me/916394549702?text=Hello%20ZoOwill%2C%20I%20have%20a%20wholesale%20and%20bulk%20enquiry%20regarding%20your%20equestrian%20catalogue."
+                href={WHATSAPP_BULK_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="zw-footer-btn-secondary"
               >
-                <MessageCircle size={15} strokeWidth={1.8} style={{ color: "#D44515" }} />
-                Enquire via WhatsApp
+                <span
+                  style={{
+                    position: "relative",
+                    zIndex: 2,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                  }}
+                >
+                  <MessageCircle size={14} strokeWidth={1.9} style={{ color: "#D44515" }} />
+                  <span>Enquire via WhatsApp</span>
+                </span>
+                <span className="zw-footer-secondary-badge" aria-hidden="true">
+                  <ArrowUpRight size={15} strokeWidth={2} />
+                </span>
               </a>
             </div>
           </div>
@@ -392,14 +661,26 @@ export default function Footer() {
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontSize: 11.5,
                   color: "#736B65",
-                  marginBottom: 18,
+                  marginBottom: 14,
                 }}
               >
                 <MapPin size={13} strokeWidth={1.8} style={{ color: "#D44515", flexShrink: 0 }} />
                 <span>Harsh International · Kanpur, Uttar Pradesh, India</span>
               </div>
 
-              {/* Social & Contact Icons */}
+              {/* Direct Clickable Contact Chips (Mobile & Desktop friendly) */}
+              <div className="zw-footer-contact-chips">
+                <a href="tel:+916394549702" className="zw-footer-chip">
+                  <Phone size={12} strokeWidth={2} style={{ color: "#D44515" }} />
+                  <span>+91 63945 49702</span>
+                </a>
+                <a href="mailto:harshtrading97@gmail.com" className="zw-footer-chip">
+                  <Mail size={12} strokeWidth={2} style={{ color: "#D44515" }} />
+                  <span>harshtrading97@gmail.com</span>
+                </a>
+              </div>
+
+              {/* Social & Quick Action Icons */}
               <div style={{ display: "flex", gap: 10 }}>
                 {[
                   { Icon: Globe, href: "#featured", label: "Explore Catalogue" },
@@ -485,34 +766,10 @@ export default function Footer() {
                 type="button"
                 onClick={scrollToTop}
                 aria-label="Back to top"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "7px 14px",
-                  borderRadius: 100,
-                  background: "white",
-                  border: "1px solid rgba(231, 174, 175, 0.6)",
-                  color: "#1A1715",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 10.5,
-                  fontWeight: 600,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  cursor: "pointer",
-                  flexShrink: 0,
-                  transition: "all 0.25s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#1A1715";
-                  e.currentTarget.style.color = "white";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "white";
-                  e.currentTarget.style.color = "#1A1715";
-                }}
+                className="zw-back-top-btn"
               >
-                Top <ArrowUp size={12} strokeWidth={2} />
+                <span>Top</span>
+                <ArrowUp size={12} strokeWidth={2} />
               </button>
             </div>
           </div>

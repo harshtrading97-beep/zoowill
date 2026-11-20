@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Menu, ChevronDown, ArrowUpRight } from "lucide-react";
+import { Search, Menu, ChevronDown, ArrowUpRight, Phone, Mail, MessageCircle } from "lucide-react";
 import MegaMenu from "./MegaMenu";
 import SearchOverlay from "./SearchOverlay";
 
@@ -221,6 +221,9 @@ const NAV_ITEMS = [
   { label: "OUR STORY", href: "#about" },
 ];
 
+const WHATSAPP_ENQUIRY_URL =
+  "https://wa.me/916394549702?text=Hello%20ZoOwill%20Equestrian%2C%20I%20would%20like%20to%20enquire%20about%20your%20products.";
+
 export default function Header({ onMobileMenuOpen, onViewProduct }) {
   const [scrolled, setScrolled]     = useState(false);
   const [activeMega, setActiveMega] = useState(null);
@@ -233,7 +236,6 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Keyboard shortcut: Ctrl+K / Cmd+K opens SearchOverlay
   useEffect(() => {
     const onKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -270,6 +272,17 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
   return (
     <>
       <style>{`
+        @keyframes zwHeaderSlideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         .zw-site-header {
           position: fixed;
           top: 0;
@@ -278,16 +291,17 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
           z-index: 50;
           padding-top: env(safe-area-inset-top, 0px);
           background: #F3EFEA;
+          animation: zwHeaderSlideDown 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
           transition: box-shadow 0.32s ease;
         }
         .zw-site-header.is-scrolled {
-          box-shadow: 0 10px 32px -12px rgba(26, 23, 21, 0.12);
+          box-shadow: 0 12px 34px -12px rgba(26, 23, 21, 0.14);
         }
 
         .zw-utility-bar {
           background: #F3EFEA;
-          border-bottom: 1px solid rgba(231, 174, 175, 0.42);
-          padding: 6px 14px;
+          border-bottom: 1px solid rgba(231, 174, 175, 0.45);
+          padding: 6px 12px;
         }
         @media (min-width: 768px) {
           .zw-utility-bar {
@@ -295,7 +309,28 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
           }
         }
 
-        /* Symmetrical 3-Column Header so Logo stays dead-center on every device */
+        .zw-contact-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          color: #5C544E;
+          text-decoration: none;
+          transition: color 0.22s ease;
+        }
+        .zw-contact-link:hover {
+          color: #D44515;
+        }
+        @media (min-width: 768px) {
+          .zw-contact-link {
+            font-size: 10.5px;
+            letter-spacing: 0.08em;
+          }
+        }
+
         .zw-main-header {
           display: grid;
           grid-template-columns: 1fr auto 1fr;
@@ -351,7 +386,7 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
             height: 40px;
             padding: 0 14px 0 15px;
             border-radius: 100px;
-            min-width: 250px;
+            min-width: 245px;
             justify-content: space-between;
           }
         }
@@ -374,10 +409,10 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
           align-items: center;
           justify-content: center;
           text-decoration: none;
-          transition: transform 0.25s ease;
+          transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .zw-brand-logo-link:hover {
-          transform: scale(1.02);
+          transform: scale(1.03);
         }
         .zw-brand-logo-img {
           height: 42px;
@@ -400,34 +435,134 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
           justify-self: end;
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 8px;
         }
 
+        /* ── Bespoke Luxury "Enquire with Us" Button ── */
         .zw-enquire-pill {
           display: none;
         }
         @media (min-width: 768px) {
           .zw-enquire-pill {
+            position: relative;
+            overflow: hidden;
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            padding: 10px 20px;
+            gap: 10px;
+            padding: 6px 6px 6px 16px;
             border-radius: 100px;
             background: #1A1715;
+            border: 1px solid rgba(231, 174, 175, 0.35);
             color: #FAF8F5;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 11px;
             font-weight: 600;
-            letter-spacing: 0.13em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             text-decoration: none;
-            box-shadow: 0 6px 18px -4px rgba(26, 23, 21, 0.28);
-            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 8px 22px -6px rgba(26, 23, 21, 0.32),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+            transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                        border-color 0.32s ease;
           }
+
+          /* Terracotta Curtain Fill */
+          .zw-enquire-pill::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #D44515 0%, #B8370C 100%);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 0;
+          }
+
+          /* Diagonal Light Sheen Sweep */
+          .zw-enquire-pill::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -130%;
+            width: 65%;
+            height: 100%;
+            background: linear-gradient(
+              105deg,
+              transparent 0%,
+              rgba(255, 255, 255, 0.28) 50%,
+              transparent 100%
+            );
+            transform: skewX(-20deg);
+            transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+            z-index: 1;
+          }
+
           .zw-enquire-pill:hover {
-            background: #D44515;
-            transform: translateY(-1px);
-            box-shadow: 0 10px 24px -6px rgba(212, 69, 21, 0.42);
+            transform: translateY(-2px);
+            border-color: rgba(243, 182, 162, 0.65);
+            box-shadow: 0 14px 30px -6px rgba(212, 69, 21, 0.48),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+          }
+          .zw-enquire-pill:hover::before {
+            transform: scaleX(1);
+          }
+          .zw-enquire-pill:hover::after {
+            left: 150%;
+          }
+
+          .zw-enquire-inner {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+          }
+
+          .zw-enquire-arrow-badge {
+            position: relative;
+            z-index: 2;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #FAF8F5;
+            transition: background 0.3s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+          }
+          .zw-enquire-pill:hover .zw-enquire-arrow-badge {
+            background: #FFFFFF;
+            color: #D44515;
+            transform: rotate(45deg);
+          }
+        }
+
+        /* Mobile Direct WhatsApp Enquire Icon Button */
+        .zw-mobile-enquire-btn {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: #1A1715;
+          border: 1px solid rgba(231, 174, 175, 0.4);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #FAF8F5;
+          text-decoration: none;
+          box-shadow: 0 4px 12px rgba(26, 23, 21, 0.18);
+          transition: background 0.25s ease, transform 0.25s ease;
+        }
+        .zw-mobile-enquire-btn:active {
+          background: #D44515;
+          transform: scale(0.95);
+        }
+        @media (min-width: 768px) {
+          .zw-mobile-enquire-btn {
+            display: none;
           }
         }
 
@@ -516,33 +651,31 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
       `}</style>
 
       <header className={`zw-site-header ${scrolled ? "is-scrolled" : ""}`}>
-        {/* ── Top Utility Bar ── */}
+        {/* ── Top Utility Bar (Direct Contact + Brand Craftsmanship) ── */}
         <div className="zw-utility-bar">
-          {/* Mobile Single-Line Bar */}
+          {/* Mobile Direct Call & Email Strip */}
           <div
             className="flex md:hidden"
             style={{
               alignItems: "center",
               justifyContent: "center",
+              gap: 10,
               whiteSpace: "nowrap",
               overflow: "hidden",
             }}
           >
-            <span
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 9.5,
-                fontWeight: 500,
-                letterSpacing: "0.11em",
-                textTransform: "uppercase",
-                color: "#6B625C",
-              }}
-            >
-              Retail &amp; Wholesale Across India · 113+ Official Products
-            </span>
+            <a href="tel:+916394549702" className="zw-contact-link">
+              <Phone size={10} strokeWidth={2} style={{ color: "#D44515", flexShrink: 0 }} />
+              <span>+91 63945 49702</span>
+            </a>
+            <span style={{ width: 1, height: 10, background: "rgba(231, 174, 175, 0.7)" }} />
+            <a href="mailto:harshtrading97@gmail.com" className="zw-contact-link">
+              <Mail size={10} strokeWidth={2} style={{ color: "#D44515", flexShrink: 0 }} />
+              <span>harshtrading97@gmail.com</span>
+            </a>
           </div>
 
-          {/* Desktop 3-Item Bar */}
+          {/* Desktop Editorial + Direct Contact Strip */}
           <div
             className="hidden md:flex"
             style={{
@@ -562,34 +695,19 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
                 color: "#6B625C",
               }}
             >
-              Premium Equestrian Equipment | Retail &amp; Wholesale Across India
+              Handcrafted Saddlery &amp; Stable Essentials &nbsp;|&nbsp; Retail &amp; Wholesale Across India
             </span>
-            <div style={{ display: "flex", gap: 18, alignItems: "center" }}>
-              <span
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 10.5,
-                  fontWeight: 500,
-                  letterSpacing: "0.11em",
-                  textTransform: "uppercase",
-                  color: "#6B625C",
-                }}
-              >
-                113+ Official Products
-              </span>
+
+            <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+              <a href="tel:+916394549702" className="zw-contact-link">
+                <Phone size={11} strokeWidth={2} style={{ color: "#D44515" }} />
+                <span>+91 63945 49702</span>
+              </a>
               <span style={{ width: 1, height: 11, background: "rgba(231, 174, 175, 0.65)" }} />
-              <span
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 10.5,
-                  fontWeight: 500,
-                  letterSpacing: "0.11em",
-                  textTransform: "uppercase",
-                  color: "#6B625C",
-                }}
-              >
-                Indian Craftsmanship
-              </span>
+              <a href="mailto:harshtrading97@gmail.com" className="zw-contact-link">
+                <Mail size={11} strokeWidth={2} style={{ color: "#D44515" }} />
+                <span>harshtrading97@gmail.com</span>
+              </a>
             </div>
           </div>
         </div>
@@ -628,16 +746,31 @@ export default function Header({ onMobileMenuOpen, onViewProduct }) {
             />
           </a>
 
-          {/* Right: Enquire CTA + Mobile/Tablet Hamburger */}
+          {/* Right: Bespoke Enquire Pill + Mobile Quick Enquiry & Menu */}
           <div className="zw-header-right-slot">
             <a
-              href="https://wa.me/916394549702?text=Hello%20ZoOwill%20Equestrian%2C%20I%20would%20like%20to%20enquire%20with%20you."
+              href={WHATSAPP_ENQUIRY_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="zw-enquire-pill"
             >
-              <span>Enquire with Us</span>
-              <ArrowUpRight size={13} strokeWidth={2} />
+              <span className="zw-enquire-inner">
+                <MessageCircle size={14} strokeWidth={1.9} style={{ color: "#F3B6A2" }} />
+                <span>Enquire with Us</span>
+              </span>
+              <span className="zw-enquire-arrow-badge" aria-hidden="true">
+                <ArrowUpRight size={13} strokeWidth={2.1} />
+              </span>
+            </a>
+
+            <a
+              href={WHATSAPP_ENQUIRY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Enquire on WhatsApp"
+              className="zw-mobile-enquire-btn"
+            >
+              <MessageCircle size={17} strokeWidth={1.8} />
             </a>
 
             <button

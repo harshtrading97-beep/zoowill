@@ -15,6 +15,7 @@ const COLLECTIONS = [
     category: "saddles",
     title: "The Saddlery\n& Harness Edit",
     sub: "A curated selection of English dressage & jumping saddles, traditional brass-fitted Kashmiri Kathis, and heavy driving leather harnesses.",
+    highlights: ["Dressage & Jumping", "Kashmiri Kathis", "Driving Harnesses"],
     image: saddlesKathisImg,
     cta: "Explore Saddlery",
     href: "#featured",
@@ -25,6 +26,7 @@ const COLLECTIONS = [
     category: "grooming",
     title: "The Horse & Stable\nEssentials Edit",
     sub: "Practical equipment for everyday horse care and stable routines — from 75-inch waterproof turnout rugs and hoof boots to iron khararas and halters.",
+    highlights: ['75" Turnout Rugs', "Hoof & Bell Boots", "Iron Khararas"],
     image: groomingStableImg,
     cta: "Explore Horse Care",
     href: "#featured",
@@ -73,7 +75,7 @@ export default function Collections() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
     try {
       sessionStorage.setItem("zw_cat", catId);
-    } catch (_) { /* noop */ }
+    } catch (_) {}
     window.dispatchEvent(new CustomEvent("zw:filterCategory", { detail: catId }));
   };
 
@@ -82,7 +84,8 @@ export default function Collections() {
       <style>{`
         .zw-coll-sec {
           padding: 64px 14px 72px;
-          background: #FAF8F5;
+          background: linear-gradient(180deg, #FAF8F5 0%, #F5F0E9 100%);
+          border-top: 1px solid rgba(231, 174, 175, 0.32);
           width: 100%;
           overflow-x: clip;
         }
@@ -93,7 +96,7 @@ export default function Collections() {
         }
         @media (min-width: 1024px) {
           .zw-coll-sec {
-            padding: 104px 28px 112px;
+            padding: 108px 28px 116px;
           }
         }
 
@@ -106,7 +109,7 @@ export default function Collections() {
         @media (min-width: 840px) {
           .zw-coll-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 24px;
+            gap: 26px;
           }
         }
 
@@ -114,44 +117,42 @@ export default function Collections() {
           position: relative;
           border-radius: 24px;
           overflow: hidden;
-          min-height: 420px;
+          min-height: 450px;
           width: 100%;
           cursor: pointer;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 18px;
-          border: 1px solid rgba(231, 174, 175, 0.35);
-          box-shadow: 0 22px 55px -20px rgba(26, 23, 21, 0.25);
+          padding: 16px;
+          border: 1px solid rgba(231, 174, 175, 0.42);
+          box-shadow: 0 24px 58px -20px rgba(26, 23, 21, 0.26);
           transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
                       box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
                       border-color 0.35s ease;
         }
         @media (min-width: 768px) {
           .zw-coll-card {
-            min-height: 520px;
+            min-height: 545px;
             border-radius: 28px;
             padding: 26px;
           }
         }
 
-        /* Enhanced Terracotta + Warm Sunlit Rim Glow */
         .zw-coll-card:hover {
           transform: translateY(-7px);
-          box-shadow: 0 34px 76px -18px rgba(26, 23, 21, 0.38),
+          box-shadow: 0 36px 78px -18px rgba(26, 23, 21, 0.38),
                       0 14px 38px -10px rgba(212, 69, 21, 0.32),
                       0 0 0 1.5px rgba(212, 69, 21, 0.55);
           border-color: rgba(212, 69, 21, 0.75);
         }
 
-        /* Warm Radial Sun-Glow Overlay on Hover */
         .zw-coll-card::before {
           content: "";
           position: absolute;
           inset: 0;
           background: radial-gradient(
-            circle at 80% 18%,
-            rgba(255, 224, 198, 0.28) 0%,
+            circle at 82% 16%,
+            rgba(255, 224, 198, 0.3) 0%,
             rgba(212, 69, 21, 0.14) 38%,
             transparent 70%
           );
@@ -164,7 +165,6 @@ export default function Collections() {
           opacity: 1;
         }
 
-        /* Crisp Light Sheen Sweep across Card */
         .zw-coll-card::after {
           content: "";
           position: absolute;
@@ -191,14 +191,6 @@ export default function Collections() {
           transform: scale(1.07);
           filter: brightness(1.05);
         }
-        .zw-coll-card:hover .zw-coll-cta-btn {
-          background: #D44515;
-          color: #FFFFFF;
-          box-shadow: 0 10px 26px -6px rgba(212, 69, 21, 0.55);
-        }
-        .zw-coll-card:hover .zw-coll-cta-icon {
-          transform: translate(2px, -2px);
-        }
 
         .zw-coll-top-bar {
           position: relative;
@@ -206,63 +198,188 @@ export default function Collections() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 12px;
+          gap: 10px;
+        }
+
+        .zw-coll-tag-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 7px 14px;
+          border-radius: 100px;
+          background: rgba(20, 17, 15, 0.48);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .zw-coll-card:hover .zw-coll-tag-pill {
+          background: rgba(20, 17, 15, 0.65);
+          border-color: rgba(243, 182, 162, 0.48);
+        }
+
+        .zw-coll-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #F3B6A2;
+          transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .zw-coll-card:hover .zw-coll-dot {
+          background: #D44515;
+          box-shadow: 0 0 10px #D44515;
         }
 
         .zw-coll-glass {
           position: relative;
           z-index: 4;
           margin-top: auto;
-          background: rgba(24, 21, 19, 0.62);
-          backdrop-filter: blur(18px);
-          -webkit-backdrop-filter: blur(18px);
+          background: rgba(22, 19, 17, 0.66);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.18);
-          border-radius: 18px;
+          border-radius: 20px;
           padding: 18px;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
           transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
         }
         .zw-coll-card:hover .zw-coll-glass {
           border-color: rgba(243, 182, 162, 0.45);
-          background: rgba(24, 21, 19, 0.7);
-          box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.35);
+          background: rgba(22, 19, 17, 0.76);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22),
+                      0 14px 36px -8px rgba(0, 0, 0, 0.38);
         }
         @media (min-width: 768px) {
           .zw-coll-glass {
-            border-radius: 20px;
-            padding: 24px 26px;
+            border-radius: 22px;
+            padding: 26px 28px;
           }
         }
 
+        .zw-coll-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-bottom: 18px;
+        }
+        .zw-coll-chip {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          color: rgba(255, 255, 255, 0.88);
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          border-radius: 100px;
+          padding: 4px 10px;
+        }
+
         .zw-coll-cta-btn {
+          position: relative;
+          overflow: hidden;
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          gap: 8px;
+          justify-content: space-between;
+          gap: 12px;
           width: 100%;
-          min-height: 44px;
-          padding: 11px 22px;
-          background: #FFFFFF;
+          min-height: 46px;
+          padding: 6px 6px 6px 20px;
+          background: #FAF8F5;
+          border: 1px solid rgba(255, 255, 255, 0.55);
           color: #1A1715;
           border-radius: 100px;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 11px;
           font-weight: 600;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.13em;
           text-transform: uppercase;
           text-decoration: none;
-          box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.28);
-          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+          box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.32),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      color 0.32s ease,
+                      border-color 0.32s ease,
+                      box-shadow 0.32s ease;
         }
         @media (min-width: 520px) {
           .zw-coll-cta-btn {
             width: auto;
+            justify-content: center;
+            padding: 6px 6px 6px 22px;
           }
+        }
+
+        .zw-coll-cta-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, #D44515 0%, #B8370C 100%);
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 0;
+        }
+
+        .zw-coll-cta-btn::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.35) 50%,
+            transparent 100%
+          );
+          transform: skewX(-20deg);
+          transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .zw-coll-card:hover .zw-coll-cta-btn,
+        .zw-coll-cta-btn:hover {
+          color: #FFFFFF;
+          border-color: rgba(243, 182, 162, 0.65);
+          box-shadow: 0 14px 30px -6px rgba(212, 69, 21, 0.52);
+        }
+        .zw-coll-cta-btn:hover {
+          transform: translateY(-2px);
+        }
+        .zw-coll-card:hover .zw-coll-cta-btn::before,
+        .zw-coll-cta-btn:hover::before {
+          transform: scaleX(1);
+        }
+        .zw-coll-cta-btn:hover::after {
+          left: 150%;
+        }
+
+        .zw-coll-cta-badge {
+          position: relative;
+          z-index: 2;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #1A1715;
+          color: #FAF8F5;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-coll-card:hover .zw-coll-cta-badge,
+        .zw-coll-cta-btn:hover .zw-coll-cta-badge {
+          background: #FFFFFF;
+          color: #D44515;
+          transform: rotate(45deg);
         }
       `}</style>
 
       <section id="collections" ref={sectionRef} className="zw-coll-sec">
         <div style={{ maxWidth: 1280, margin: "0 auto", width: "100%" }}>
-          {/* Editorial Header */}
           <div
             className="coll-heading"
             style={{
@@ -308,7 +425,6 @@ export default function Collections() {
             </p>
           </div>
 
-          {/* Two-Card Grid */}
           <div className="zw-coll-grid">
             {COLLECTIONS.map((coll) => (
               <div
@@ -316,7 +432,6 @@ export default function Collections() {
                 className="coll-card zw-coll-card"
                 onClick={(e) => jumpToCollection(e, coll.category)}
               >
-                {/* Background Image */}
                 <img
                   src={coll.image}
                   alt={coll.title}
@@ -333,42 +448,42 @@ export default function Collections() {
                   }}
                 />
 
-                {/* Warm Directional Gradient Overlay */}
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
                     background:
-                      "linear-gradient(180deg, rgba(26,23,21,0.34) 0%, rgba(26,23,21,0.16) 40%, rgba(26,23,21,0.82) 100%)",
+                      "linear-gradient(180deg, rgba(22,19,17,0.36) 0%, rgba(22,19,17,0.14) 38%, rgba(22,19,17,0.85) 100%)",
                     pointerEvents: "none",
                   }}
                 />
 
-                {/* Top Editorial Number & Tag */}
                 <div className="zw-coll-top-bar">
-                  <span
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontStyle: "italic",
-                      fontSize: 16,
-                      fontWeight: 500,
-                      letterSpacing: "0.06em",
-                      color: "rgba(255, 255, 255, 0.9)",
-                    }}
-                  >
-                    {coll.num} — {coll.tag}
-                  </span>
+                  <div className="zw-coll-tag-pill">
+                    <span className="zw-coll-dot" />
+                    <span
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: 10.5,
+                        fontWeight: 600,
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        color: "rgba(255, 255, 255, 0.94)",
+                      }}
+                    >
+                      {coll.num} · {coll.tag}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Bottom Glass Content Panel */}
                 <div className="zw-coll-glass">
                   <h3
                     style={{
                       fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: "clamp(24px, 2.6vw, 32px)",
+                      fontSize: "clamp(25px, 2.7vw, 34px)",
                       fontWeight: 400,
                       color: "#FFFFFF",
-                      lineHeight: 1.14,
+                      lineHeight: 1.13,
                       marginBottom: 10,
                       whiteSpace: "pre-line",
                     }}
@@ -381,26 +496,30 @@ export default function Collections() {
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
                       fontSize: "clamp(12.5px, 1vw, 13.5px)",
                       color: "rgba(255, 255, 255, 0.84)",
-                      marginBottom: 18,
+                      marginBottom: 14,
                       lineHeight: 1.58,
                     }}
                   >
                     {coll.sub}
                   </p>
 
-                  {/* Primary Action CTA */}
+                  <div className="zw-coll-chips">
+                    {coll.highlights.map((item) => (
+                      <span key={item} className="zw-coll-chip">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+
                   <a
                     href={coll.href}
                     onClick={(e) => jumpToCollection(e, coll.category)}
                     className="zw-coll-cta-btn"
                   >
-                    <span>{coll.cta}</span>
-                    <ArrowUpRight
-                      size={14}
-                      strokeWidth={1.8}
-                      className="zw-coll-cta-icon"
-                      style={{ transition: "transform 0.25s ease" }}
-                    />
+                    <span style={{ position: "relative", zIndex: 2 }}>{coll.cta}</span>
+                    <span className="zw-coll-cta-badge" aria-hidden="true">
+                      <ArrowUpRight size={15} strokeWidth={2.1} />
+                    </span>
                   </a>
                 </div>
               </div>

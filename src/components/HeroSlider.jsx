@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { handleImageError } from "../data/products";
 
 import hero1 from "../assets/hero1.webp";
@@ -42,7 +42,11 @@ const SLIDES = [
     headline: ["Uncompromising", "Leather Quality."],
     sub: "Handcrafted drum-dyed leather goods built to enduring equestrian standards with solid brass and stainless steel fittings.",
     cta1: { label: "Full Catalogue", href: "#featured" },
-    cta2: { label: "Enquire on WhatsApp", href: "https://wa.me/916394549702" },
+    cta2: {
+      label: "Enquire on WhatsApp",
+      href: "https://wa.me/916394549702?text=Hello%20ZoOwill%20Equestrian%2C%20I%20would%20like%20to%20enquire%20about%20your%20products.",
+      isWhatsApp: true,
+    },
     image: hero4,
   },
 ];
@@ -106,7 +110,6 @@ export default function HeroSlider() {
   const prev = () => goTo((current - 1 + SLIDES.length) % SLIDES.length);
   const next = () => goTo((current + 1) % SLIDES.length);
 
-  /* Touch swipe handlers for mobile */
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
     setPaused(true);
@@ -159,9 +162,9 @@ export default function HeroSlider() {
         .zw-hero-frame {
           position: relative;
           width: 100%;
-          min-height: 510px;
+          min-height: 520px;
           height: calc(100svh - 126px);
-          max-height: 620px;
+          max-height: 630px;
           border-radius: 22px;
           overflow: hidden;
           background: #1A1715;
@@ -180,7 +183,6 @@ export default function HeroSlider() {
           }
         }
 
-        /* Cinematic Legibility Scrim */
         .zw-hero-scrim {
           position: absolute;
           inset: 0;
@@ -204,7 +206,6 @@ export default function HeroSlider() {
           }
         }
 
-        /* Top Editorial Status Strip */
         .zw-hero-top {
           position: relative;
           z-index: 10;
@@ -219,7 +220,6 @@ export default function HeroSlider() {
           }
         }
 
-        /* Main Copy & CTA Area */
         .zw-hero-body {
           position: relative;
           z-index: 10;
@@ -230,7 +230,7 @@ export default function HeroSlider() {
         @media (min-width: 768px) {
           .zw-hero-body {
             padding: 0 56px 46px 84px;
-            max-width: 740px;
+            max-width: 760px;
           }
         }
 
@@ -240,66 +240,188 @@ export default function HeroSlider() {
           gap: 10px;
           width: 100%;
         }
-        @media (min-width: 540px) {
+        @media (min-width: 560px) {
           .zw-hero-cta-group {
             flex-direction: row;
             align-items: center;
             width: auto;
-            gap: 12px;
+            gap: 14px;
           }
         }
 
-        .zw-hero-primary-cta,
-        .zw-hero-secondary-cta {
+        /* ── Bespoke Luxury Primary CTA ── */
+        .zw-hero-primary-cta {
+          position: relative;
+          overflow: hidden;
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          gap: 8px;
+          justify-content: space-between;
+          gap: 12px;
           width: 100%;
-          min-height: 44px;
-          padding: 12px 22px;
+          min-height: 46px;
+          padding: 6px 6px 6px 20px;
           border-radius: 100px;
+          background: linear-gradient(135deg, #D44515 0%, #B8370C 100%);
+          border: 1px solid rgba(255, 224, 198, 0.35);
+          color: #FFFFFF;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.13em;
           text-transform: uppercase;
           text-decoration: none;
-          transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+          box-shadow: 0 12px 28px -6px rgba(212, 69, 21, 0.58),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.32s ease;
         }
-        @media (min-width: 540px) {
-          .zw-hero-primary-cta,
-          .zw-hero-secondary-cta {
+        @media (min-width: 560px) {
+          .zw-hero-primary-cta {
             width: auto;
-            padding: 13px 26px;
+            justify-content: center;
+            padding: 6px 6px 6px 22px;
           }
         }
 
-        .zw-hero-primary-cta {
-          background: #D44515;
-          color: #FFFFFF;
-          box-shadow: 0 10px 26px -6px rgba(212, 69, 21, 0.55);
+        /* Sheen sweep across primary button */
+        .zw-hero-primary-cta::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.32) 50%,
+            transparent 100%
+          );
+          transform: skewX(-20deg);
+          transition: left 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 1;
         }
         .zw-hero-primary-cta:hover {
-          background: #BF3A0F;
           transform: translateY(-2px);
+          border-color: rgba(255, 255, 255, 0.65);
+          box-shadow: 0 16px 34px -6px rgba(212, 69, 21, 0.7),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.32);
+        }
+        .zw-hero-primary-cta:hover::after {
+          left: 150%;
         }
 
-        .zw-hero-secondary-cta {
-          background: rgba(255, 255, 255, 0.12);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.28);
+        .zw-hero-primary-badge {
+          position: relative;
+          z-index: 2;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #FFFFFF;
+          color: #D44515;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      background 0.25s ease,
+                      color 0.25s ease;
+        }
+        .zw-hero-primary-cta:hover .zw-hero-primary-badge {
+          background: #1A1715;
           color: #FFFFFF;
+          transform: rotate(45deg);
+        }
+
+        /* ── Bespoke Luxury Secondary CTA (Glass + Ivory Curtain Fill) ── */
+        .zw-hero-secondary-cta {
+          position: relative;
+          overflow: hidden;
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          width: 100%;
+          min-height: 46px;
+          padding: 6px 6px 6px 20px;
+          border-radius: 100px;
+          background: rgba(26, 23, 21, 0.45);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1px solid rgba(255, 255, 255, 0.32);
+          color: #FFFFFF;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.13em;
+          text-transform: uppercase;
+          text-decoration: none;
+          box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.35);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      color 0.32s ease,
+                      border-color 0.32s ease;
+        }
+        @media (min-width: 560px) {
+          .zw-hero-secondary-cta {
+            width: auto;
+            justify-content: center;
+            padding: 6px 6px 6px 22px;
+          }
+        }
+
+        .zw-hero-secondary-cta::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: #FAF8F5;
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 0;
         }
         .zw-hero-secondary-cta:hover {
-          background: #FFFFFF;
           color: #1A1715;
-          border-color: #FFFFFF;
+          border-color: #FAF8F5;
           transform: translateY(-2px);
         }
+        .zw-hero-secondary-cta:hover::before {
+          transform: scaleX(1);
+        }
 
-        /* Mobile Bottom Controls Bar (Prevents arrows from covering text) */
+        .zw-hero-secondary-badge {
+          position: relative;
+          z-index: 2;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          color: #FFFFFF;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-hero-secondary-cta:hover .zw-hero-secondary-badge {
+          background: #D44515;
+          border-color: #D44515;
+          color: #FFFFFF;
+          transform: rotate(45deg);
+        }
+
+        .zw-hero-btn-label {
+          position: relative;
+          z-index: 2;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        /* Mobile Bottom Controls Bar */
         .zw-hero-mobile-footer {
           position: relative;
           z-index: 10;
@@ -417,7 +539,7 @@ export default function HeroSlider() {
           {/* Legibility Gradient */}
           <div className="zw-hero-scrim" />
 
-          {/* Top Bar: Clean Editorial Tag + Slide Counter */}
+          {/* Top Bar */}
           <div className="zw-hero-top">
             <span
               style={{
@@ -448,7 +570,6 @@ export default function HeroSlider() {
 
           {/* Center-Bottom Editorial Copy & Actions */}
           <div ref={contentRef} className="zw-hero-body">
-            {/* Italic Eyebrow (Zero AI pill box) */}
             <div className="hero-eyebrow" style={{ marginBottom: 6 }}>
               <span
                 style={{
@@ -464,7 +585,6 @@ export default function HeroSlider() {
               </span>
             </div>
 
-            {/* Display Headline */}
             <h1
               style={{
                 margin: "0 0 10px 0",
@@ -483,7 +603,6 @@ export default function HeroSlider() {
               ))}
             </h1>
 
-            {/* Subtitle */}
             <p
               className="hero-sub"
               style={{
@@ -491,18 +610,20 @@ export default function HeroSlider() {
                 fontSize: "clamp(12.5px, 1.05vw, 15px)",
                 lineHeight: 1.58,
                 color: "rgba(255, 255, 255, 0.84)",
-                marginBottom: 18,
+                marginBottom: 20,
                 maxWidth: 510,
               }}
             >
               {slide.sub}
             </p>
 
-            {/* Primary & Secondary CTAs */}
+            {/* Bespoke Luxury Primary & Secondary CTAs */}
             <div className="hero-ctas zw-hero-cta-group">
               <a href={slide.cta1.href} className="zw-hero-primary-cta">
-                <span>{slide.cta1.label}</span>
-                <ArrowRight size={14} strokeWidth={1.8} />
+                <span className="zw-hero-btn-label">{slide.cta1.label}</span>
+                <span className="zw-hero-primary-badge" aria-hidden="true">
+                  <ArrowUpRight size={15} strokeWidth={2.1} />
+                </span>
               </a>
 
               <a
@@ -511,13 +632,20 @@ export default function HeroSlider() {
                 rel={slide.cta2.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="zw-hero-secondary-cta"
               >
-                <span>{slide.cta2.label}</span>
-                <ArrowRight size={14} strokeWidth={1.8} />
+                <span className="zw-hero-btn-label">
+                  {slide.cta2.isWhatsApp && (
+                    <MessageCircle size={14} strokeWidth={1.9} style={{ color: "#F3B6A2" }} />
+                  )}
+                  <span>{slide.cta2.label}</span>
+                </span>
+                <span className="zw-hero-secondary-badge" aria-hidden="true">
+                  <ArrowUpRight size={15} strokeWidth={2} />
+                </span>
               </a>
             </div>
           </div>
 
-          {/* Mobile Dedicated Bottom Bar (Dots + Prev/Next Buttons) */}
+          {/* Mobile Dedicated Bottom Bar */}
           <div className="zw-hero-mobile-footer">
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
               {SLIDES.map((_, i) => (

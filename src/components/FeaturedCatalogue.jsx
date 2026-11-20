@@ -8,6 +8,8 @@ import {
   Search,
   X,
   ArrowUp,
+  ArrowDown,
+  Check,
 } from "lucide-react";
 import { products, categories } from "../data/products";
 import ProductCard from "./ProductCard";
@@ -33,7 +35,7 @@ function parseDiscountPercent(discountStr) {
 export default function FeaturedCatalogue({ onView }) {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery]       = useState("");
-  const [priceFilter, setPriceFilter]       = useState("all"); // "all" | "under500" | "bestDeal"
+  const [priceFilter, setPriceFilter]       = useState("all");
   const [sort, setSort]                     = useState("featured");
   const [sortOpen, setSortOpen]             = useState(false);
   const [visibleCount, setVisibleCount]     = useState(INITIAL_BATCH);
@@ -43,7 +45,6 @@ export default function FeaturedCatalogue({ onView }) {
   const sortRef     = useRef(null);
   const tabsWrapRef = useRef(null);
 
-  // Pick up category hint from SearchOverlay / MegaMenu / CategoryShowcase
   useEffect(() => {
     try {
       const saved = sessionStorage.getItem("zw_cat");
@@ -51,7 +52,7 @@ export default function FeaturedCatalogue({ onView }) {
         setActiveCategory(saved);
         sessionStorage.removeItem("zw_cat");
       }
-    } catch (_) { /* noop */ }
+    } catch (_) {}
 
     const handler = (e) => {
       if (e.detail) {
@@ -65,7 +66,6 @@ export default function FeaturedCatalogue({ onView }) {
     return () => window.removeEventListener("zw:filterCategory", handler);
   }, []);
 
-  // Auto-scroll active category pill into view on mobile
   useEffect(() => {
     const wrap = tabsWrapRef.current;
     if (!wrap) return;
@@ -79,7 +79,6 @@ export default function FeaturedCatalogue({ onView }) {
     }
   }, [activeCategory]);
 
-  // Close sort dropdown on outside click or Escape key
   useEffect(() => {
     const onOutsideClick = (e) => {
       if (sortRef.current && !sortRef.current.contains(e.target)) {
@@ -97,7 +96,6 @@ export default function FeaturedCatalogue({ onView }) {
     };
   }, []);
 
-  // Category counts map (computed once)
   const categoryCounts = useMemo(() => {
     const counts = { all: products.length };
     for (const p of products) {
@@ -106,7 +104,6 @@ export default function FeaturedCatalogue({ onView }) {
     return counts;
   }, []);
 
-  // Logical filtering & sorting
   const filtered = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
 
@@ -121,12 +118,13 @@ export default function FeaturedCatalogue({ onView }) {
         return false;
       }
       if (q) {
-        const inName = p.name?.toLowerCase().includes(q);
-        const inSku = p.sku?.toLowerCase().includes(q);
-        const inAsin = p.asin?.toLowerCase().includes(q);
-        const inCat = p.category?.toLowerCase().includes(q);
+        const inName   = p.name?.toLowerCase().includes(q);
+        const inDesc   = p.description?.toLowerCase().includes(q);
+        const inSku    = p.sku?.toLowerCase().includes(q);
+        const inAsin   = p.asin?.toLowerCase().includes(q);
+        const inCat    = p.category?.toLowerCase().includes(q);
         const inColors = p.colors?.some((c) => c.toLowerCase().includes(q));
-        return inName || inSku || inAsin || inCat || inColors;
+        return inName || inDesc || inSku || inAsin || inCat || inColors;
       }
       return true;
     });
@@ -162,7 +160,7 @@ export default function FeaturedCatalogue({ onView }) {
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.85,
           ease: "power3.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
         }
@@ -176,8 +174,8 @@ export default function FeaturedCatalogue({ onView }) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         gridRef.current.querySelectorAll(".prod-card-wrap"),
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, stagger: 0.03, duration: 0.45, ease: "power2.out" }
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, stagger: 0.025, duration: 0.42, ease: "power2.out" }
       );
     }, gridRef);
     return () => ctx.revert();
@@ -203,9 +201,21 @@ export default function FeaturedCatalogue({ onView }) {
   return (
     <>
       <style>{`
+        @keyframes zwSortPop {
+          from {
+            opacity: 0;
+            transform: translateY(-6px) scale(0.98);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
         .zw-feat-sec {
           padding: 64px 12px 76px;
-          background: #FAF8F5;
+          background: linear-gradient(180deg, #FAF8F5 0%, #F6F1EB 100%);
+          border-top: 1px solid rgba(231, 174, 175, 0.3);
           width: 100%;
           overflow-x: clip;
         }
@@ -216,29 +226,28 @@ export default function FeaturedCatalogue({ onView }) {
         }
         @media (min-width: 1024px) {
           .zw-feat-sec {
-            padding: 104px 28px 112px;
+            padding: 108px 28px 116px;
           }
         }
 
         .zw-toolbar-card {
-          background: rgba(255, 255, 255, 0.82);
-          border: 1px solid rgba(231, 174, 175, 0.42);
-          border-radius: 20px;
+          background: rgba(255, 255, 255, 0.88);
+          border: 1px solid rgba(231, 174, 175, 0.48);
+          border-radius: 22px;
           padding: 12px;
-          margin-bottom: 20px;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 12px 34px -18px rgba(26, 23, 21, 0.1);
+          margin-bottom: 22px;
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          box-shadow: 0 14px 36px -18px rgba(26, 23, 21, 0.1);
         }
         @media (min-width: 768px) {
           .zw-toolbar-card {
             padding: 18px 20px;
-            border-radius: 24px;
-            margin-bottom: 26px;
+            border-radius: 26px;
+            margin-bottom: 28px;
           }
         }
 
-        /* Horizontal Category Scroll on Phone, Wrapped on Desktop */
         .zw-cat-tabs-scroll {
           display: flex;
           align-items: center;
@@ -267,7 +276,7 @@ export default function FeaturedCatalogue({ onView }) {
           min-height: 36px;
           padding: 7px 14px;
           border-radius: 100px;
-          border: 1px solid rgba(231, 174, 175, 0.55);
+          border: 1px solid rgba(231, 174, 175, 0.58);
           background: #FFFFFF;
           color: #1A1715;
           font-family: 'Plus Jakarta Sans', sans-serif;
@@ -277,39 +286,40 @@ export default function FeaturedCatalogue({ onView }) {
           white-space: nowrap;
           flex-shrink: 0;
           cursor: pointer;
-          transition: all 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+          transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .zw-pill-btn:hover {
-          border-color: rgba(212, 69, 21, 0.45);
+          border-color: rgba(212, 69, 21, 0.5);
           background: #FFFDFB;
+          transform: translateY(-1px);
         }
         .zw-pill-btn.active {
           background: #1A1715;
           color: #FAF8F5;
           border-color: #1A1715;
-          box-shadow: 0 8px 18px -6px rgba(26, 23, 21, 0.34);
+          box-shadow: 0 8px 20px -6px rgba(26, 23, 21, 0.36);
         }
         .zw-pill-count {
           font-size: 10px;
-          padding: 1px 6px;
+          padding: 1px 7px;
           border-radius: 100px;
           background: #F3EFEA;
           color: #736B65;
           font-weight: 600;
+          transition: all 0.25s ease;
         }
         .zw-pill-btn.active .zw-pill-count {
-          background: rgba(255, 255, 255, 0.18);
-          color: #FAF8F5;
+          background: #D44515;
+          color: #FFFFFF;
         }
 
-        /* Search + Quick Filter + Sort Row */
         .zw-controls-row {
           display: flex;
           flex-direction: column;
           gap: 10px;
           margin-top: 12px;
           padding-top: 12px;
-          border-top: 1px solid rgba(231, 174, 175, 0.3);
+          border-top: 1px solid rgba(231, 174, 175, 0.32);
         }
         @media (min-width: 820px) {
           .zw-controls-row {
@@ -330,15 +340,16 @@ export default function FeaturedCatalogue({ onView }) {
           padding: 0 14px;
           height: 40px;
           width: 100%;
-          transition: border-color 0.2s ease, background 0.2s ease;
+          transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
         }
         .zw-inline-search:focus-within {
           background: #FFFFFF;
           border-color: #D44515;
+          box-shadow: 0 6px 18px -8px rgba(212, 69, 21, 0.28);
         }
         @media (min-width: 820px) {
           .zw-inline-search {
-            max-width: 320px;
+            max-width: 340px;
           }
         }
 
@@ -351,26 +362,45 @@ export default function FeaturedCatalogue({ onView }) {
         }
 
         .zw-chip-toggle {
-          padding: 7px 12px;
+          padding: 7px 13px;
           border-radius: 100px;
-          border: 1px solid rgba(231, 174, 175, 0.55);
+          border: 1px solid rgba(231, 174, 175, 0.58);
           background: #FFFFFF;
           color: #5C544E;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 11px;
           font-weight: 500;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: all 0.22s ease;
           white-space: nowrap;
+        }
+        .zw-chip-toggle:hover {
+          border-color: rgba(212, 69, 21, 0.45);
+          color: #1A1715;
         }
         .zw-chip-toggle.active {
           background: #FDF4F4;
           border-color: #D44515;
           color: #D44515;
           font-weight: 600;
+          box-shadow: 0 4px 12px -4px rgba(212, 69, 21, 0.22);
         }
 
-        /* Responsive Product Grid: strict 2 cols on mobile, 3 on tablet, 4 on desktop */
+        .zw-sort-dropdown {
+          position: absolute;
+          top: calc(100% + 6px);
+          right: 0;
+          background: #FFFFFF;
+          border: 1px solid rgba(231, 174, 175, 0.55);
+          border-radius: 16px;
+          box-shadow: 0 18px 44px -8px rgba(26, 23, 21, 0.18);
+          overflow: hidden;
+          min-width: 196px;
+          z-index: 30;
+          padding: 5px;
+          animation: zwSortPop 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
         .zw-catalogue-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -394,36 +424,111 @@ export default function FeaturedCatalogue({ onView }) {
           }
         }
 
+        /* ── Bespoke Luxury Load More Pill Button ── */
         .zw-load-more-btn {
+          position: relative;
+          overflow: hidden;
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          gap: 10px;
-          min-height: 46px;
-          padding: 13px 28px;
+          justify-content: space-between;
+          gap: 14px;
+          width: 100%;
+          max-width: 310px;
+          min-height: 48px;
+          padding: 6px 6px 6px 22px;
           border-radius: 100px;
           background: #1A1715;
-          border: 1px solid #1A1715;
+          border: 1px solid rgba(231, 174, 175, 0.38);
           color: #FAF8F5;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 11px;
           font-weight: 600;
-          letter-spacing: 0.14em;
+          letter-spacing: 0.13em;
           text-transform: uppercase;
           cursor: pointer;
-          box-shadow: 0 10px 26px -10px rgba(26, 23, 21, 0.3);
-          transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+          box-shadow: 0 12px 28px -8px rgba(26, 23, 21, 0.32),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.32s ease;
+        }
+        @media (min-width: 480px) {
+          .zw-load-more-btn {
+            width: auto;
+            max-width: none;
+            justify-content: center;
+            padding: 6px 6px 6px 24px;
+          }
+        }
+
+        .zw-load-more-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, #D44515 0%, #B8370C 100%);
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 0;
+        }
+        .zw-load-more-btn::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.32) 50%,
+            transparent 100%
+          );
+          transform: skewX(-20deg);
+          transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 1;
         }
         .zw-load-more-btn:hover {
-          background: #D44515;
-          border-color: #D44515;
           transform: translateY(-2px);
+          border-color: rgba(243, 182, 162, 0.65);
+          box-shadow: 0 16px 34px -6px rgba(212, 69, 21, 0.48);
+        }
+        .zw-load-more-btn:hover::before {
+          transform: scaleX(1);
+        }
+        .zw-load-more-btn:hover::after {
+          left: 150%;
+        }
+
+        .zw-load-more-badge {
+          position: relative;
+          z-index: 2;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          color: #FAF8F5;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-load-more-btn:hover .zw-load-more-badge {
+          background: #FFFFFF;
+          border-color: #FFFFFF;
+          color: #D44515;
+          transform: translateY(2px);
+        }
+        .zw-load-more-btn.is-reset:hover .zw-load-more-badge {
+          transform: rotate(-180deg);
         }
       `}</style>
 
       <section id="featured" ref={sectionRef} className="zw-feat-sec">
         <div style={{ maxWidth: 1280, margin: "0 auto", width: "100%" }}>
-          {/* Clean Editorial Section Header (No AI pill box or star icon) */}
           <div
             className="feat-heading"
             style={{
@@ -468,13 +573,11 @@ export default function FeaturedCatalogue({ onView }) {
                 maxWidth: 620,
               }}
             >
-              From handcrafted Kashmiri Kathis and English saddlery to everyday stable essentials, browse 113 official listings built for modern horse care.
+              From handcrafted Kashmiri Kathis and English saddlery to everyday stable essentials — browse our complete equestrian catalogue built for modern horse care.
             </p>
           </div>
 
-          {/* Filter, Live Search & Sort Toolbar */}
           <div className="zw-toolbar-card">
-            {/* Category Filter Tabs */}
             <div ref={tabsWrapRef} className="zw-cat-tabs-scroll">
               {categories.map((cat) => {
                 const isActive = activeCategory === cat.id;
@@ -495,11 +598,9 @@ export default function FeaturedCatalogue({ onView }) {
               })}
             </div>
 
-            {/* Search + Quick Price/Deal Filters + Sort Dropdown */}
             <div className="zw-controls-row">
-              {/* Inline Search Input */}
               <div className="zw-inline-search">
-                <Search size={14} strokeWidth={1.8} style={{ color: "#736B65", flexShrink: 0 }} />
+                <Search size={14} strokeWidth={1.8} style={{ color: "#D44515", flexShrink: 0 }} />
                 <input
                   type="text"
                   value={searchQuery}
@@ -540,7 +641,6 @@ export default function FeaturedCatalogue({ onView }) {
                 )}
               </div>
 
-              {/* Quick Chips + Sort */}
               <div className="zw-sub-actions">
                 <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
                   <button
@@ -565,7 +665,6 @@ export default function FeaturedCatalogue({ onView }) {
                   </button>
                 </div>
 
-                {/* Sort Dropdown */}
                 <div ref={sortRef} style={{ position: "relative", flexShrink: 0 }}>
                   <button
                     type="button"
@@ -576,7 +675,7 @@ export default function FeaturedCatalogue({ onView }) {
                       gap: 7,
                       height: 36,
                       padding: "0 14px",
-                      border: "1px solid rgba(231, 174, 175, 0.6)",
+                      border: "1px solid rgba(231, 174, 175, 0.65)",
                       borderRadius: 100,
                       background: "#FFFFFF",
                       cursor: "pointer",
@@ -600,21 +699,7 @@ export default function FeaturedCatalogue({ onView }) {
                   </button>
 
                   {sortOpen && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "calc(100% + 6px)",
-                        right: 0,
-                        background: "#FFFFFF",
-                        border: "1px solid rgba(231, 174, 175, 0.55)",
-                        borderRadius: 14,
-                        boxShadow: "0 16px 40px -8px rgba(26, 23, 21, 0.16)",
-                        overflow: "hidden",
-                        minWidth: 190,
-                        zIndex: 30,
-                        padding: 4,
-                      }}
-                    >
+                    <div className="zw-sort-dropdown">
                       {SORT_OPTIONS.map((opt) => (
                         <button
                           key={opt.value}
@@ -642,14 +727,7 @@ export default function FeaturedCatalogue({ onView }) {
                         >
                           <span>{opt.label}</span>
                           {sort === opt.value && (
-                            <span
-                              style={{
-                                width: 6,
-                                height: 6,
-                                borderRadius: "50%",
-                                background: "#D44515",
-                              }}
-                            />
+                            <Check size={13} strokeWidth={2.2} style={{ color: "#D44515" }} />
                           )}
                         </button>
                       ))}
@@ -659,7 +737,6 @@ export default function FeaturedCatalogue({ onView }) {
               </div>
             </div>
 
-            {/* Active Result Counter & Reset Strip */}
             <div
               style={{
                 display: "flex",
@@ -713,7 +790,6 @@ export default function FeaturedCatalogue({ onView }) {
             </div>
           </div>
 
-          {/* Product Grid or Empty State */}
           {displayedProducts.length > 0 ? (
             <>
               <div ref={gridRef} className="zw-catalogue-grid">
@@ -724,14 +800,13 @@ export default function FeaturedCatalogue({ onView }) {
                 ))}
               </div>
 
-              {/* Load More & Back to Top Controls */}
               <div
                 style={{
-                  marginTop: 38,
+                  marginTop: 42,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: 12,
+                  gap: 14,
                 }}
               >
                 {hasMore && (
@@ -741,8 +816,14 @@ export default function FeaturedCatalogue({ onView }) {
                       onClick={() => setVisibleCount((prev) => prev + 16)}
                       className="zw-load-more-btn"
                     >
-                      Load More ({filtered.length - visibleCount} remaining)
+                      <span style={{ position: "relative", zIndex: 2 }}>
+                        Load More ({filtered.length - visibleCount} Remaining)
+                      </span>
+                      <span className="zw-load-more-badge" aria-hidden="true">
+                        <ArrowDown size={15} strokeWidth={2.1} />
+                      </span>
                     </button>
+
                     <button
                       type="button"
                       onClick={() => setVisibleCount(filtered.length)}
@@ -752,7 +833,9 @@ export default function FeaturedCatalogue({ onView }) {
                         color: "#736B65",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                         fontSize: 12,
+                        fontWeight: 500,
                         textDecoration: "underline",
+                        textUnderlineOffset: "3px",
                         cursor: "pointer",
                         padding: "4px 8px",
                       }}
@@ -769,20 +852,24 @@ export default function FeaturedCatalogue({ onView }) {
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
-                      gap: 5,
-                      background: "white",
-                      border: "1px solid rgba(231, 174, 175, 0.55)",
+                      gap: 6,
+                      background: "#FFFFFF",
+                      border: "1px solid rgba(231, 174, 175, 0.65)",
                       borderRadius: 100,
                       padding: "8px 16px",
                       color: "#1A1715",
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
                       fontSize: 11,
                       fontWeight: 600,
+                      letterSpacing: "0.06em",
+                      textTransform: "uppercase",
                       cursor: "pointer",
                       marginTop: 4,
+                      boxShadow: "0 4px 12px rgba(26, 23, 21, 0.05)",
                     }}
                   >
-                    <ArrowUp size={12} strokeWidth={2} /> Back to Filters
+                    <ArrowUp size={12} strokeWidth={2} style={{ color: "#D44515" }} />
+                    <span>Back to Filters</span>
                   </button>
                 )}
               </div>
@@ -793,8 +880,8 @@ export default function FeaturedCatalogue({ onView }) {
                 textAlign: "center",
                 padding: "52px 20px",
                 background: "#FFFFFF",
-                borderRadius: 22,
-                border: "1px solid rgba(231, 174, 175, 0.4)",
+                borderRadius: 24,
+                border: "1px solid rgba(231, 174, 175, 0.45)",
                 maxWidth: 480,
                 margin: "0 auto",
                 boxShadow: "0 20px 50px -15px rgba(26, 23, 21, 0.08)",
@@ -816,19 +903,23 @@ export default function FeaturedCatalogue({ onView }) {
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontSize: 13.5,
                   color: "#736B65",
-                  marginBottom: 22,
+                  marginBottom: 24,
                   lineHeight: 1.6,
                 }}
               >
-                No items matched your current search or filter selection. Reset filters to view all 113 official ZoOwill products.
+                No items matched your current search or filter selection. Reset filters to view the complete ZoOwill equestrian catalogue.
               </p>
               <button
                 type="button"
                 onClick={resetAllFilters}
-                className="btn btn-dark"
-                style={{ padding: "12px 26px", fontSize: 11 }}
+                className="zw-load-more-btn is-reset"
               >
-                Reset &amp; View All Products
+                <span style={{ position: "relative", zIndex: 2 }}>
+                  Reset &amp; View All Products
+                </span>
+                <span className="zw-load-more-badge" aria-hidden="true">
+                  <RotateCcw size={14} strokeWidth={2.1} />
+                </span>
               </button>
             </div>
           )}

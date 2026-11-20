@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, ExternalLink, ShoppingBag } from "lucide-react";
+import { ArrowUpRight, ShoppingBag } from "lucide-react";
 import { handleImageError } from "../data/products";
 import saddlesKathisImg from "../assets/saddles_&-kathis.webp";
 
@@ -11,6 +11,7 @@ export default function BrandHeritage() {
   const sectionRef = useRef(null);
   const imgRef     = useRef(null);
   const textRef    = useRef(null);
+  const amazonRef  = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,12 +47,26 @@ export default function BrandHeritage() {
         {
           opacity: 1,
           y: 0,
-          stagger: 0.09,
+          stagger: 0.08,
           duration: 0.85,
           ease: "power3.out",
           scrollTrigger: { trigger: textRef.current, start: "top 82%" },
         }
       );
+
+      if (amazonRef.current) {
+        gsap.fromTo(
+          amazonRef.current,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: { trigger: amazonRef.current, start: "top 88%" },
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -110,11 +125,40 @@ export default function BrandHeritage() {
           background: #EFE9E1;
           border: 1px solid rgba(231, 174, 175, 0.45);
           box-shadow: 0 28px 70px -22px rgba(26, 23, 21, 0.22);
+          transition: border-color 0.35s ease, box-shadow 0.4s ease;
+        }
+        .zw-heritage-media:hover .zw-heritage-img-box {
+          border-color: rgba(212, 69, 21, 0.45);
+          box-shadow: 0 32px 76px -20px rgba(26, 23, 21, 0.28),
+                      0 10px 28px -10px rgba(212, 69, 21, 0.22);
         }
         @media (min-width: 768px) {
           .zw-heritage-img-box {
             border-radius: 26px;
           }
+        }
+
+        /* Subtle Sheen Sweep across Heritage Photo */
+        .zw-heritage-img-box::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.24) 50%,
+            transparent 100%
+          );
+          transform: skewX(-18deg);
+          transition: left 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 3;
+        }
+        .zw-heritage-media:hover .zw-heritage-img-box::after {
+          left: 150%;
         }
 
         .zw-heritage-caption-card {
@@ -130,6 +174,12 @@ export default function BrandHeritage() {
           padding: 14px 18px;
           box-shadow: 0 14px 36px -8px rgba(26, 23, 21, 0.16);
           z-index: 5;
+          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.3s ease;
+        }
+        .zw-heritage-media:hover .zw-heritage-caption-card {
+          transform: translateY(-3px);
+          border-color: rgba(212, 69, 21, 0.45);
         }
         @media (min-width: 640px) {
           .zw-heritage-caption-card {
@@ -168,42 +218,108 @@ export default function BrandHeritage() {
           background: rgba(231, 174, 175, 0.4);
         }
 
+        /* ── Bespoke Luxury Story CTA Button ── */
         .zw-heritage-cta {
+          position: relative;
+          overflow: hidden;
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          gap: 10px;
+          justify-content: space-between;
+          gap: 14px;
           width: 100%;
           min-height: 48px;
           background: #1A1715;
+          border: 1px solid rgba(231, 174, 175, 0.38);
           color: #FAF8F5;
-          padding: 14px 28px;
+          padding: 6px 6px 6px 22px;
           border-radius: 100px;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 11px;
           font-weight: 600;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
           text-decoration: none;
-          box-shadow: 0 12px 28px -8px rgba(26, 23, 21, 0.35);
-          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+          box-shadow: 0 12px 28px -8px rgba(26, 23, 21, 0.35),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.32s ease;
         }
         @media (min-width: 520px) {
           .zw-heritage-cta {
             width: auto;
+            justify-content: center;
+            padding: 6px 6px 6px 24px;
           }
         }
-        .zw-heritage-cta:hover {
-          background: #D44515;
-          transform: translateY(-2px);
-          box-shadow: 0 16px 32px -8px rgba(212, 69, 21, 0.45);
+
+        .zw-heritage-cta::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, #D44515 0%, #B8370C 100%);
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 0;
         }
-        .zw-heritage-cta:hover .zw-cta-arrow {
-          transform: translateX(4px);
+        .zw-heritage-cta::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%
+          );
+          transform: skewX(-20deg);
+          transition: left 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 1;
+        }
+        .zw-heritage-cta:hover {
+          transform: translateY(-2px);
+          border-color: rgba(243, 182, 162, 0.65);
+          box-shadow: 0 16px 34px -6px rgba(212, 69, 21, 0.48),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.24);
+        }
+        .zw-heritage-cta:hover::before {
+          transform: scaleX(1);
+        }
+        .zw-heritage-cta:hover::after {
+          left: 150%;
         }
 
-        /* Dedicated Amazon Storefront Section Below Story */
+        .zw-heritage-cta-badge {
+          position: relative;
+          z-index: 2;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          color: #FAF8F5;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-heritage-cta:hover .zw-heritage-cta-badge {
+          background: #FFFFFF;
+          border-color: #FFFFFF;
+          color: #D44515;
+          transform: rotate(45deg);
+        }
+
+        /* ── Dedicated Amazon Storefront Section Below Story ── */
         .zw-amazon-strip {
+          position: relative;
+          overflow: hidden;
           margin-top: 48px;
           background: #FFFFFF;
           border: 1px solid rgba(231, 174, 175, 0.5);
@@ -213,6 +329,12 @@ export default function BrandHeritage() {
           flex-direction: column;
           gap: 20px;
           box-shadow: 0 18px 46px -18px rgba(26, 23, 21, 0.09);
+          transition: border-color 0.35s ease, box-shadow 0.4s ease, transform 0.35s ease;
+        }
+        .zw-amazon-strip:hover {
+          border-color: rgba(212, 69, 21, 0.45);
+          box-shadow: 0 24px 56px -16px rgba(26, 23, 21, 0.14),
+                      0 8px 24px -10px rgba(212, 69, 21, 0.16);
         }
         @media (min-width: 768px) {
           .zw-amazon-strip {
@@ -226,37 +348,102 @@ export default function BrandHeritage() {
           }
         }
 
+        /* ── Bespoke Luxury Amazon Store Button ── */
         .zw-amazon-store-btn {
+          position: relative;
+          overflow: hidden;
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          gap: 10px;
+          justify-content: space-between;
+          gap: 12px;
           width: 100%;
           min-height: 48px;
-          padding: 14px 26px;
+          padding: 6px 6px 6px 20px;
           border-radius: 100px;
-          background: #D44515;
+          background: linear-gradient(135deg, #D44515 0%, #B8370C 100%);
+          border: 1px solid rgba(255, 224, 198, 0.4);
           color: #FFFFFF;
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 11px;
           font-weight: 600;
-          letter-spacing: 0.14em;
+          letter-spacing: 0.13em;
           text-transform: uppercase;
           text-decoration: none;
           white-space: nowrap;
-          box-shadow: 0 10px 26px -6px rgba(212, 69, 21, 0.42);
-          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+          box-shadow: 0 12px 28px -6px rgba(212, 69, 21, 0.45),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+          transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                      border-color 0.32s ease;
         }
         @media (min-width: 768px) {
           .zw-amazon-store-btn {
             width: auto;
             flex-shrink: 0;
+            justify-content: center;
+            padding: 6px 6px 6px 22px;
           }
         }
-        .zw-amazon-store-btn:hover {
+
+        .zw-amazon-store-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
           background: #1A1715;
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 0;
+        }
+        .zw-amazon-store-btn::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -130%;
+          width: 65%;
+          height: 100%;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%
+          );
+          transform: skewX(-20deg);
+          transition: left 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+          pointer-events: none;
+          z-index: 1;
+        }
+        .zw-amazon-store-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 14px 30px -6px rgba(26, 23, 21, 0.35);
+          border-color: rgba(231, 174, 175, 0.55);
+          box-shadow: 0 16px 34px -6px rgba(26, 23, 21, 0.38);
+        }
+        .zw-amazon-store-btn:hover::before {
+          transform: scaleX(1);
+        }
+        .zw-amazon-store-btn:hover::after {
+          left: 150%;
+        }
+
+        .zw-amazon-btn-badge {
+          position: relative;
+          z-index: 2;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: #FFFFFF;
+          color: #D44515;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
+          transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .zw-amazon-store-btn:hover .zw-amazon-btn-badge {
+          background: #D44515;
+          color: #FFFFFF;
+          transform: rotate(45deg);
         }
       `}</style>
 
@@ -331,7 +518,6 @@ export default function BrandHeritage() {
 
             {/* Right: Editorial Story Column */}
             <div ref={textRef}>
-              {/* Clean Italic Eyebrow */}
               <div className="reveal-line" style={{ marginBottom: 8 }}>
                 <span
                   style={{
@@ -346,7 +532,6 @@ export default function BrandHeritage() {
                 </span>
               </div>
 
-              {/* Main Editorial Heading */}
               <h2
                 className="reveal-line"
                 style={{
@@ -362,7 +547,6 @@ export default function BrandHeritage() {
                 Rooted in Indian Craft. Made for the World of Equestrianism.
               </h2>
 
-              {/* Narrative Paragraphs */}
               <p
                 className="reveal-line"
                 style={{
@@ -376,7 +560,7 @@ export default function BrandHeritage() {
                 ZoOwill brings together the rich heritage of Indian saddlery and
                 the evolving needs of modern equestrian life. Inspired by
                 generations of traditional craftsmanship, we offer a
-                thoughtfully curated collection of equestrian equipment, from
+                thoughtfully curated collection of equestrian equipment — from
                 handcrafted Kashmiri Kathis and traditional Aligarh Rakabs to
                 premium leather harnesses, riding saddles, and everyday
                 essentials for horses and stables.
@@ -415,7 +599,6 @@ export default function BrandHeritage() {
                 that honour tradition and serve the demands of everyday riding.
               </p>
 
-              {/* Signature Italic Motto */}
               <p
                 className="reveal-line"
                 style={{
@@ -430,7 +613,6 @@ export default function BrandHeritage() {
                 Our Heritage. Your Equestrian Journey.
               </p>
 
-              {/* Subheading: The Craft Behind ZoOwill */}
               <div className="reveal-line" style={{ marginBottom: 12 }}>
                 <p
                   style={{
@@ -446,21 +628,21 @@ export default function BrandHeritage() {
                 </p>
               </div>
 
-              {/* Verified Stats Grid */}
+              {/* Evergreen Heritage Pillars (No hardcoded product counts) */}
               <div className="reveal-line zw-heritage-stats">
                 {[
-                  { num: "113+", label: "Official Products" },
-                  { num: "08", label: "Curated Collections" },
-                  { num: "India", label: "Artisan Heritage & Origin" },
+                  { num: "08", label: "Curated Disciplines" },
+                  { num: "PAN-India", label: "Retail & Wholesale" },
+                  { num: "Kanpur", label: "Artisan Saddlery Origin" },
                 ].map((stat) => (
                   <div key={stat.label} className="zw-heritage-stat-item">
                     <p
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "clamp(26px, 3vw, 38px)",
+                        fontSize: "clamp(24px, 2.8vw, 36px)",
                         fontWeight: 400,
                         color: "#1A1715",
-                        lineHeight: 1,
+                        lineHeight: 1.05,
                       }}
                     >
                       {stat.num}
@@ -483,7 +665,6 @@ export default function BrandHeritage() {
                 ))}
               </div>
 
-              {/* Traditional Craftsmanship Line */}
               <div
                 className="reveal-line"
                 style={{
@@ -516,23 +697,22 @@ export default function BrandHeritage() {
                 </p>
               </div>
 
-              {/* Primary Collection CTA */}
+              {/* Bespoke Luxury Collection CTA */}
               <div className="reveal-line">
                 <a href="#featured" className="zw-heritage-cta">
-                  Discover the ZoOwill Collection
-                  <ArrowRight
-                    size={15}
-                    strokeWidth={1.8}
-                    className="zw-cta-arrow"
-                    style={{ transition: "transform 0.3s ease" }}
-                  />
+                  <span style={{ position: "relative", zIndex: 2 }}>
+                    Discover the ZoOwill Collection
+                  </span>
+                  <span className="zw-heritage-cta-badge" aria-hidden="true">
+                    <ArrowUpRight size={15} strokeWidth={2.1} />
+                  </span>
                 </a>
               </div>
             </div>
           </div>
 
           {/* ── Dedicated Amazon Storefront Section Below Story ── */}
-          <div className="zw-amazon-strip">
+          <div ref={amazonRef} className="zw-amazon-strip">
             <div style={{ maxWidth: 640 }}>
               <span
                 style={{
@@ -577,9 +757,21 @@ export default function BrandHeritage() {
               rel="noopener noreferrer"
               className="zw-amazon-store-btn"
             >
-              <ShoppingBag size={15} strokeWidth={1.8} />
-              <span>Explore Our Amazon Store</span>
-              <ExternalLink size={14} strokeWidth={1.8} />
+              <span
+                style={{
+                  position: "relative",
+                  zIndex: 2,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 9,
+                }}
+              >
+                <ShoppingBag size={14} strokeWidth={1.9} />
+                <span>Explore Our Amazon Store</span>
+              </span>
+              <span className="zw-amazon-btn-badge" aria-hidden="true">
+                <ArrowUpRight size={15} strokeWidth={2.1} />
+              </span>
             </a>
           </div>
         </div>
