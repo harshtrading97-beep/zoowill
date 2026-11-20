@@ -1,5 +1,5 @@
-// ZoOwill Equestrian — Official Product Catalogue
-// Manufacturer: Harsh International, Kanpur, India
+// ZoOwill Equestrian — Official 113-Product Catalogue
+// Manufacturer: Harsh International, Kanpur, Uttar Pradesh, India
 // Currency: INR (₹) | All 113 Verified Amazon India Listings
 
 import saddlesKathisImg from "../assets/saddles_&-kathis.webp";
@@ -11,10 +11,17 @@ import horseProtectionRugsImg from "../assets/horse-protection-&-rugs.webp";
 import groomingStableImg from "../assets/grooming-&-stable.webp";
 import riderApparelImg from "../assets/rider-&-apparel.webp";
 
-import zoowilGroomingBrushImg from "../assets/zoowil-grooming-animal-brush.png";
-import zoowilRidingBreechesImg from "../assets/zoowil-black-riding_breeches.png";
-import zoowilHoofBootsImg from "../assets/zoowil-black-horse-hoof-boots.webp";
-import zoowilMetalBrushImg from "../assets/zoowil-horse-cow-metal-grooming-brush.png";
+import hero1Img from "../assets/hero1.webp";
+import hero2Img from "../assets/hero2.webp";
+import hero3Img from "../assets/hero3.webp";
+import hero4Img from "../assets/hero4.webp";
+
+import zoowilgroominganimalbrushImg from "../assets/zoowil-grooming-animal-brush.png";
+import zoowilblackridingbreechesImg from "../assets/zoowil-black-riding_breeches.png";
+import zoowilblackhorsehoofbootsImg from "../assets/zoowil-black-horse-hoof-boots.webp";
+import zoowilhorseandcowmetalbrushImg from "../assets/zoowil-horse-cow-metal-grooming-brush.png";
+
+export const heroImages = [hero1Img, hero2Img, hero3Img, hero4Img];
 
 export const FALLBACK_IMG =
   "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1000&q=80";
@@ -34,7 +41,6 @@ export const CATALOGUE_META = {
   email: "harshtrading97@gmail.com",
 };
 
-// ── Official Categories ──────────────────────────────────────
 export const categories = [
   { id: "all", label: "All Products" },
   { id: "saddles", label: "Saddles & Kathis" },
@@ -47,7 +53,6 @@ export const categories = [
   { id: "rider", label: "Rider & Apparel" },
 ];
 
-// ── Pricing Formatter ────────────────────────────────────────
 export function formatPrice(priceINR, priceMax = null) {
   if (priceMax) {
     return `₹${priceINR.toLocaleString("en-IN")} – ₹${priceMax.toLocaleString("en-IN")}`;
@@ -55,8 +60,6 @@ export function formatPrice(priceINR, priceMax = null) {
   return `₹${priceINR.toLocaleString("en-IN")}`;
 }
 
-// ── Complete 113 Official Products ───────────────────────────
-// To add a new product, copy any object below and update id, name, category, priceINR, asin & amazonUrl.
 export const products = [
   {
     id: 1,
@@ -70,8 +73,9 @@ export const products = [
     reviewCount: 2,
     sizes: ["20 x 9 x 6 cm"],
     colors: ["Green"],
-    image: zoowilGroomingBrushImg,
-    description: "Compact oval grooming brush with soft bristles and an adjustable hand strap for comfortable everyday brushing across horses, cattle, and pets.",
+    image: zoowilgroominganimalbrushImg,
+    description:
+      "Compact oval grooming brush with soft bristles and an adjustable hand strap for comfortable everyday brushing across horses, cattle, and pets.",
     specs: [
       "Oval shape (20 x 9 x 6 cm) with gentle soft bristles",
       "Adjustable black hand strap for a firm, comfortable grip",
@@ -79,6 +83,10 @@ export const products = [
       "Suitable for horses, cows, and daily coat care",
     ],
     sku: "ZW-GS-001",
+    partNumber: "ho-gr-pl-bru",
+    genericName: "Horse wooden brush",
+    manufacturer: "HARSH INTERNATIONAL",
+    countryOfOrigin: "India",
     asin: "B0GVP8VVN2",
     amazonUrl: "https://www.amazon.in/dp/B0GVP8VVN2",
   },
@@ -94,8 +102,9 @@ export const products = [
     reviewCount: 26,
     sizes: ["32", "36"],
     colors: ["Black"],
-    image: zoowilRidingBreechesImg,
-    description: "Slim-fit unisex riding breeches in classic black with a zippered front pocket, hook-and-loop ankle closures for a neat boot fit, and sturdy belt loops.",
+    image: zoowilblackridingbreechesImg,
+    description:
+      "Slim-fit unisex riding breeches in classic black with a zippered front pocket, hook-and-loop ankle closures for a neat boot fit, and sturdy belt loops.",
     specs: [
       "Stretchable slim-fit design for daily riding and arena practice",
       "Front zippered pocket to keep small essentials secure",
@@ -103,6 +112,9 @@ export const products = [
       "Sturdy button waistband with reinforced belt loops",
     ],
     sku: "ZW-RA-002",
+    genericName: "Equestrian Riding Breeches",
+    manufacturer: "HARSH INTERNATIONAL",
+    countryOfOrigin: "India",
     asin: "B0H8ZNZPBQ",
     amazonUrl: "https://www.amazon.in/dp/B0H8ZNZPBQ",
   },
@@ -118,8 +130,9 @@ export const products = [
     reviewCount: 3,
     sizes: ["Small", "Medium", "Large"],
     colors: ["Black", "Brown"],
-    image: zoowilHoofBootsImg,
-    description: "Durable protective hoof footwear with adjustable straps for parade, stable, and light working use (not intended for riding or racing).",
+    image: zoowilblackhorsehoofbootsImg,
+    description:
+      "Durable protective hoof footwear with adjustable straps for parade, stable, and light working use (not intended for riding or racing).",
     specs: [
       "Heavy-duty sole for hoof protection on hard ground",
       "Adjustable front and ankle straps for a secure fit",
@@ -142,8 +155,9 @@ export const products = [
     reviewCount: 3,
     sizes: ["Standard"],
     colors: ["Black", "Brown"],
-    image: zoowilMetalBrushImg,
-    description: "Traditional iron kharara grooming comb with a sturdy grip handle to remove dried mud, sweat, and loose winter coat.",
+    image: zoowilhorseandcowmetalbrushImg,
+    description:
+      "Traditional iron kharara grooming comb with a sturdy grip handle to remove dried mud, sweat, and loose winter coat.",
     specs: [
       "Heavy-duty iron rings for deep coat cleaning and massage",
       "Ergonomic handle for comfortable, fatigue-free brushing",
@@ -2663,79 +2677,83 @@ export const products = [
   },
 ];
 
-// ── Helper: Automatic Category Counter ───────────────────────
 function countByCategory(categoryId) {
   return products.filter((item) => item.category === categoryId).length;
 }
 
-// ── Category Showcase (Auto-Calculated Counts) ───────────────
 export const categoryShowcase = [
   {
     id: "saddles",
     label: "Saddles & Kathis",
     count: countByCategory("saddles"),
-    description: "English dressage, jumping, polo saddles and traditional Kashmiri Kathis.",
+    description:
+      "English dressage, jumping, polo saddles and traditional Kashmiri Kathis.",
     image: saddlesKathisImg,
   },
   {
     id: "harnesses",
     label: "Harnesses",
     count: countByCategory("harnesses"),
-    description: "Single and double horse heavy driving leather harness sets in Cob and Full sizes.",
+    description:
+      "Single and double horse heavy driving leather harness sets in Cob and Full sizes.",
     image: harnessesImg,
   },
   {
     id: "bridles",
     label: "Bridles & Bits",
     count: countByCategory("bridles"),
-    description: "Leather and Biothane bridles, crystal browbands, breastplates, and steel bits.",
+    description:
+      "Leather and Biothane bridles, crystal browbands, breastplates, and steel bits.",
     image: bridlesBitsImg,
   },
   {
     id: "halters",
     label: "Halters & Leads",
     count: countByCategory("halters"),
-    description: "Nylon foal and horse halters, 8 m–10 m handwoven leads, and metal snap ropes.",
+    description:
+      "Nylon foal and horse halters, 8 m–10 m handwoven leads, and metal snap ropes.",
     image: haltersLeadsImg,
   },
   {
     id: "stirrups",
     label: "Stirrups & Girths",
     count: countByCategory("stirrups"),
-    description: "Aligarh iron rakabs, aluminium stirrups, fleece girths, and quilted saddle pads.",
+    description:
+      "Aligarh iron rakabs, aluminium stirrups, fleece girths, and quilted saddle pads.",
     image: stirrupsGirthsImg,
   },
   {
     id: "protection",
     label: "Horse Protection & Rugs",
     count: countByCategory("protection"),
-    description: "Waterproof winter turnout rugs (75-inch Jhool), leg wraps, bell boots, and hoof boots.",
+    description:
+      "Waterproof winter turnout rugs (75-inch Jhool), leg wraps, bell boots, and hoof boots.",
     image: horseProtectionRugsImg,
   },
   {
     id: "grooming",
     label: "Grooming & Stable",
     count: countByCategory("grooming"),
-    description: "Wooden brushes, iron khararas, curry combs, hoof picks, hay nets, and clippers.",
+    description:
+      "Wooden brushes, iron khararas, curry combs, hoof picks, hay nets, and clippers.",
     image: groomingStableImg,
   },
   {
     id: "rider",
     label: "Rider & Apparel",
     count: countByCategory("rider"),
-    description: "Unisex riding breeches, body protector vests, helmets, spurs, and leather belts.",
+    description:
+      "Unisex riding breeches, body protector vests, helmets, spurs, and leather belts.",
     image: riderApparelImg,
   },
 ];
 
-// ── Featured Best Sellers (Curated Standout Pieces) ──────────
 export const BEST_SELLER_IDS = [2, 6, 24, 36, 77, 81, 96, 102];
 
 export const bestSellers = products.filter((p) =>
   BEST_SELLER_IDS.includes(p.id)
 );
 
-// ── Clean Lookup Helpers ─────────────────────────────────────
 export function getProductsByCategory(categoryId) {
   if (!categoryId || categoryId === "all") return products;
   return products.filter((p) => p.category === categoryId);
