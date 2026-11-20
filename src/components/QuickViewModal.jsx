@@ -1031,11 +1031,8 @@ export default function ProductModal({ product, onClose }) {
                 )}
               </div>
 
-              <p
+            <p
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 6,
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontSize: 12,
                   color: "#6B625C",
@@ -1043,13 +1040,7 @@ export default function ProductModal({ product, onClose }) {
                   marginBottom: 12,
                 }}
               >
-                <Sparkles
-                  size={13}
-                  style={{ color: "#D44515", flexShrink: 0, marginTop: 2 }}
-                />
-                <span>
-                  Prices listed in Indian Rupees (INR). Final taxes and delivery details are confirmed on Amazon or via direct enquiry.
-                </span>
+                Prices listed in Indian Rupees (INR). Final taxes and delivery details are confirmed on Amazon or via direct enquiry.
               </p>
 
               <div
