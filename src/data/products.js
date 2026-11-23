@@ -22,6 +22,12 @@ import zoowilblackhorsehoofbootsImg from "../assets/zoowil-black-horse-hoof-boot
 import zoowilhorseandcowmetalbrushImg from "../assets/zoowil-horse-cow-metal-grooming-brush.png";
 import zoowilrednylonfoalhalterImg from "../assets/zoowil-red-nylon-foal-halter-pony-size.webp";
 import zoowilHorseGroomingWoodenBrushRedBristlesImg from "../assets/zoowil-horse-grooming-wooden-brush-red-bristles.webp";
+import horseGroomingBrushShowcaseImg from "../assets/horse-grooming-brush-showcase.webp";
+import redHorseHayNetShowcaseImg from "../assets/red-horse-hay-net-showcase.webp";
+import horseHoofPickBrushShowcaseImg from "../assets/horse-hoof-pick-brush-showcase.webp";
+import whiteFlatHorseLeadRopeShowcaseImg from "../assets/white-flat-horse-lead-rope-showcase.webp";
+import blackRubberCurryCombShowcaseImg from "../assets/black-rubber-curry-comb-showcase.webp";
+import brownLeatherBeltShowcaseImg from "../assets/brown-leather-belt-showcase.webp";
 
 export const heroImages = [hero1Img, hero2Img, hero3Img, hero4Img];
 
@@ -228,7 +234,7 @@ export const products = [
     reviewCount: 33,
     sizes: ["Standard"],
     colors: ["Black", "Brown"],
-    image: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=1200&q=85",
+    image: horseGroomingBrushShowcaseImg,
     specs: [
       "Textured non-slip back for wet or dry grooming",
       "Sealed no-hole block prevents water and dirt buildup",
@@ -251,7 +257,7 @@ export const products = [
     reviewCount: 40,
     sizes: ["Standard"],
     colors: ["White", "Red"],
-    image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=1200&q=85",
+    image: redHorseHayNetShowcaseImg,
     specs: [
       "Heavy-duty braided nylon cord with reinforced top ring",
       "Slow-feed mesh design reduces hay waste and supports digestion",
@@ -274,7 +280,7 @@ export const products = [
     reviewCount: 3,
     sizes: ['7"'],
     colors: ["Black", "Brown"],
-    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=85",
+    image: horseHoofPickBrushShowcaseImg,
     specs: [
       "Strong steel pick hook removes packed mud and stones safely",
       "Stiff nylon bristles sweep away fine debris from the hoof sole",
@@ -297,7 +303,7 @@ export const products = [
     reviewCount: 1,
     sizes: ["Full", "Cob", "Pony"],
     colors: ["White"],
-    image: "https://images.unsplash.com/photo-1566251037378-5e04e3bec343?auto=format&fit=crop&w=1200&q=85",
+    image: whiteFlatHorseLeadRopeShowcaseImg,
     specs: [
       "10-meter heavy-duty flat webbing strap for lunging and groundwork",
       "Heavy metal swivel snap hook prevents rope twisting",
@@ -320,7 +326,7 @@ export const products = [
     reviewCount: 33,
     sizes: ["Standard"],
     colors: ["Black"],
-    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=85",
+    image: blackRubberCurryCombShowcaseImg,
     specs: [
       "Flexible rubber teeth gently loosen dried dirt and dead hair",
       "Stimulates natural coat oils while massaging muscles",
@@ -343,7 +349,7 @@ export const products = [
     reviewCount: 40,
     sizes: ["32", "34", "36"],
     colors: ["Brown"],
-    image: "https://images.unsplash.com/photo-1566251037378-5e04e3bec343?auto=format&fit=crop&w=1200&q=85",
+    image: brownLeatherBeltShowcaseImg,
     specs: [
       "Textured leather strap designed for breeches and casual trousers",
       "Polished metal buckle with secure keeper loop",
