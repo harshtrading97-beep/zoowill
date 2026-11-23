@@ -71,10 +71,11 @@ export default function FeaturedCatalogue({ onView }) {
     if (!wrap) return;
     const activeBtn = wrap.querySelector('[data-active="true"]');
     if (activeBtn) {
-      activeBtn.scrollIntoView({
+      const targetLeft =
+        activeBtn.offsetLeft - wrap.clientWidth / 2 + activeBtn.offsetWidth / 2;
+      wrap.scrollTo({
+        left: Math.max(0, targetLeft),
         behavior: "smooth",
-        block: "nearest",
-        inline: "center",
       });
     }
   }, [activeCategory]);
@@ -179,7 +180,7 @@ export default function FeaturedCatalogue({ onView }) {
       );
     }, gridRef);
     return () => ctx.revert();
-  }, [activeCategory, sort, priceFilter]);
+  }, [activeCategory, sort, priceFilter, visibleCount]);
 
   const handleCategoryChange = (catId) => {
     setActiveCategory(catId);
@@ -424,7 +425,6 @@ export default function FeaturedCatalogue({ onView }) {
           }
         }
 
-        /* ── Bespoke Luxury Load More Pill Button ── */
         .zw-load-more-btn {
           position: relative;
           overflow: hidden;
